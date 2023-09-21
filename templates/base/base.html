@@ -1,0 +1,13 @@
+{% include './top.html' %}
+<body>
+
+
+    {% block navbar %}{% endblock navbar %}
+    {% block sidebar %} {%endblock sidebar %}
+    {% comment %}  {% endcomment %}
+    {% block content %}{% endblock content %} 
+    {% comment %}  {% endcomment %}
+    {% block footer %}{% endblock footer %}
+
+
+{% include './bottom.html' %}

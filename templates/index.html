@@ -1,0 +1,22 @@
+{% extends './base/base.html' %}
+
+
+{% comment %} navbar starts {% endcomment %}
+ {% block navbar %}
+  {% include './components/navbar.html' %}
+ {% endblock navbar %}
+{% comment %} navbarends {% endcomment %}
+
+
+{% comment %} Welcome page starts {% endcomment %}
+ {%block content%}
+ <div>{%include './components/details.html'%}</div>
+    {%include './components/about.html'%}
+    {%include './components/services.html'%}
+    {%include './components/team.html'%}
+    {%include './components/contact.html'%}
+ {%endblock content%}
+
+ {% block footer %}
+ 
+ {% endblock footer %}

@@ -1,0 +1,112 @@
+
+/* This is the css for signin form */
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+  width: 100%;
+  display: flex;
+  clear: both;
+
+}
+
+.container .form{
+  height: 100vh;
+  width:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container .form h1{
+  font-size: 50px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 50px;
+}
+
+.container .form form{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+form .inp{
+  width: 60%;
+  margin: auto;
+  height: 60px;
+  margin-bottom: 30px;
+  border-radius: 50px;
+  box-shadow: 20px 20px 20px #8e1df720,
+  -10px -10px 20px #8e1df720;
+  position: relative;
+  
+}
+
+form .inp input{
+  height: 100%;
+  width: 100%;
+  border-radius: 50px;
+  outline: none;
+  border: none;
+  padding: 20px 70px;
+  font-size: 18px;
+}
+form .inp ion-icon{
+position: absolute;
+color: var(--color-purple);
+text-align: center;
+font-size: 30px;
+top: 50%;
+left: 20px;
+transform: translateY(-50%);
+}
+
+form .check{
+  width: 60%;
+  margin: 0 auto 40px;
+  display: flex;
+  align-items: center;
+}
+
+.form .check input{
+  margin: 0 5px 0 20px;
+}
+
+
+form .check span{
+  margin-top: 3px;
+  color: #555555;
+  font-size: 13px;
+}
+
+form .sign{
+  color: var(--color-white);
+  font-size: 20px;
+  width: 250px;
+  margin: auto;
+  padding: 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 20px;
+}
+
+form .regis{
+  text-align: center;
+  font-size: 14px;
+}
+
+form .regis a{
+  color: var(--color-purple);
+  text-decoration: none;
+}
+
+form .regis:hover a{
+  text-decoration: underline;
+}
