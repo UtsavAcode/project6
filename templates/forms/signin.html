@@ -15,14 +15,10 @@
 <div class="container">
 <div class="form">
 <h1>Sign In</h1>
-<form action="" method="POST">
+<form action="/signin" method="POST">
     {% csrf_token %}
-    {% if messages%}
-        {% for messages in messages %}
-            {{message}}
-        {% endfor %}
-    {% endif %}
-
+    {{ form1.email }}
+<!--     
 
     <div class="inp">
         <ion-icon name="person-circle-outline"></ion-icon>
@@ -35,7 +31,9 @@
     <div class="check">
         <input type="checkbox">
         <span>Remember Me</span>
-    </div>
+    </div> -->
+
+        
 
     <button type="submit" class="sign btn bg-warning">Sign In</button>
     <span class="regis">Not Registered? <a href="{% url 'register'%}">Register</a></span>

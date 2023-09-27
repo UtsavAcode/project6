@@ -14,45 +14,17 @@
 <div class="container">
 <div class="form">
 <h1>Register</h1>
-<form action="" method="POST">
+ <form action="" method="POST">
     {% csrf_token %}
-     <div class="inp">
-        <ion-icon name="person-circle-outline"></ion-icon>
-        <input type="text" class="text-center" placeholder="Username" name="username">
-    </div>
+    {{form}}
+    <!-- {{ form.user_name.label_tag }}
+    {{ form.user_name }}
+    {{ form.user_name.errors}} -->
 
-    <div class="inp">
-        <ion-icon name="person-circle-outline"></ion-icon>
-        <input type="e-mail" class="text-center" placeholder="E-mail" name="email" class="center-placeholder">
-    </div>
+<button type="submit" class="sign btn bg-warning">Sign Up</button>
+<span class="regis">Already have an account ? <a href="{%url 'sign'%}">Sign in</a></span>
 
-     <div class="inp">
-        <ion-icon name="person-circle-outline"></ion-icon>
-        <input type="number" class="text-center" placeholder="Phone no." name="phone">
-    </div>
-
-    <div class="inp">
-        <ion-icon name="lock-closed-outline"></ion-icon>
-        <input type="password" class="text-center" placeholder="Password" name="password">
-    </div>
-    
-    <div class="inp">
-        <ion-icon name="lock-closed-outline"></ion-icon>
-        <input type="date" class="date text-center" placeholder="Date of birth" name="date">
-    </div>
-
-  
-  
-    
-
-    <button type="submit" class="sign btn bg-warning">Sign Up</button>
-    <span class="regis">Already have an account ? <a href="{%url 'sign'%}">Sign in</a></span>
 </form>
-</div>
-<!-- <div class="div-text">
-<h1>Roommate Finder</h1>
-<p>Find your Perfect Roommate.</p>
-</div> -->
-</div>
+
 
 {%endblock%}
