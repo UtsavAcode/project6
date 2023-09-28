@@ -12,22 +12,8 @@
 <!-- Sidebar start  -->
 
 <div class="sidebar container-fluid">
-  
-  <!-- <ul>
-    <li><a href="#"><i class="bi bi-tools"></i>item1</a></li>
-    <li><a href="#"><i class="bi bi-tools"></i>item1</a></li>
-    <li><a href="#"><i class="bi bi-tools"></i>item1</a></li>
-    <li><a href="#"><i class="bi bi-tools"></i>item1</a></li>
-    <li><a href="#"><i class="bi bi-tools"></i>item1</a></li>
-  </ul> -->
 
 <ul>
-  <!-- <li>
-    <div class="text-muted small fw-bold text-uppercase px-3">
-      CORE
-    </div>
-  </li> -->
-
   <li>
     <a href="#" class="nav-link px-3 active">
       <span class="me-2">
@@ -67,6 +53,19 @@
     <hr class="dropdown-divider">
   </li>
   <li>
+    <a href="{% url 'register_table'%}" class="nav-link px-3 active">
+       <span class="me-2">
+       <i class="bi bi-people-fill text-white"></i>
+      </span>
+      <span class="text-white">User Table</span>
+    </a>
+  </li>
+
+
+   <li class="my-4">
+    <hr class="dropdown-divider">
+  </li>
+  <li>
     <a href="#" class="nav-link px-3 active">
        <span class="me-2">
        <i class="bi bi-box-arrow-left text-white"></i>
@@ -74,6 +73,7 @@
       <span class="text-white">Logout</span>
     </a>
   </li>
+
 </ul>
 
 </div>
@@ -84,11 +84,21 @@
   <div class="col-md-3 mb-3">
     <div class="card">
       <div class="card text-bg-primary h-100">
-        <div class="card-header">Header</div>
-  <d      iv class="card-body">
-            <h5 class="card-title">Primary card title</h5>
-    <p       class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </d>
+        <div class="card-header">Users</div>
+            <div class="card-body">
+              <h1 class=" reg card-title ml-3"><i class="bi bi-people-fill" style="font-size: 50px; margin-left: 90px;"></i></h1>
+              
+              <p class="card-text" style="font-size: 30px; margin-left: 100px;">
+                {% for obj in objs %}
+                    <!-- {{ forloop.counter }} -->
+                    {% with forloop.counter as current_counter %}
+                      {% if forloop.last %}
+                        {{ current_counter }}
+                      {% endif %}
+                     {% endwith %}
+                {%endfor%}
+              </p>
+        </div>
     </div>
 </div>
 </div>
@@ -155,61 +165,5 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">Data Tables</div>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table
-                    id="example"
-                    class="table table-striped data-table"
-                    style="width: 100%"
-                  >
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                      </tr>
-                      
-                      <tr>
-                        <td>Donna Snider</td>
-                        <td>Customer Support</td>
-                        <td>New York</td>
-                        <td>27</td>
-                        <td>2011/01/25</td>
-                        <td>$112,000</td>
-                      </tr>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 </div>

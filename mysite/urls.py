@@ -12,6 +12,8 @@ urlpatterns = [
     path('signin/',views.sign,name='sign'),
     path('padmin/',views.admin, name='padmin'),
     path('admin_nav/',views.admin_nav, name='admin_nav'),
-    path('home/',views.home, name="home"),
+    path('home/',views.home, name='home'),
+    path('admin_login/',views.admin_login, name='admin_login'),
+    path('register_table/',views.register_table, name='register_table'),
     
 ]

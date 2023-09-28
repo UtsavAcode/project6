@@ -28,10 +28,38 @@ def services(request):
 
 
 def admin(request):
-    return render(request,'admin/padmin.html')
+    objs = Signup.objects.all()
+    return render(request,'admin/padmin.html',{'objs':objs})
 
 def admin_nav(request):
     return render(request,'admin/admin_nav.html')
+
+def register_table(request):
+    objs = Signup.objects.all()
+    return render(request,'admin/register_table.html',{'objs':objs})
+
+def admin_login(request):
+    if request.user.is_authenticated:
+        return redirect('/padmin/')
+        
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user_obj = User.objects.filter(username=username)
+        if not user_obj.exists ():
+            # messages.info(request, 'Account not found')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            
+        user_obj = authenticate(username=username, password=password)
+
+        if user_obj and user_obj.is_superuser:
+            login(request, user_obj)
+            return redirect('/padmin/')
+            
+        # messages.info(request, 'Invalid password')
+        return redirect('/')
+          
+    return render(request,'forms/admin_login.html')
 
 
 
@@ -67,20 +95,18 @@ def register(request):
 
 def sign(request):
     if request.method == 'POST':
-        form1 = Register(request.POST)
-        if form1.is_valid():
-            email = form1.cleaned_data['email']
-            password = form1.cleaned_data['password']
-            user = authenticate(request,email=email,password=password)
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = User.objects.filter(username=username)
+            user = authenticate(request, username=username, password=password)
             if user is not None: 
                 login(request,user)
-                return redirect('/home/')
+                return redirect("/home/")
+            else:
+                return redirect('/')
+                # messages.info(request,'username incorrect')
 
-        else: 
-            form1 = Login()
     
-    
-
     return render(request,'forms/signin.html')
 
 
