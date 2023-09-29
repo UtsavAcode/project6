@@ -15,5 +15,6 @@ urlpatterns = [
     path('home/',views.home, name='home'),
     path('admin_login/',views.admin_login, name='admin_login'),
     path('register_table/',views.register_table, name='register_table'),
+     path('delete-item/', views.delete_item, name='delete-item'),
     
 ]

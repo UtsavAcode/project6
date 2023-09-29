@@ -1,12 +1,13 @@
 {% extends '../base/base.html' %}
 {% load static %}
+{%block title%}
+{%endblock%}
 
 {%block css%}
 <link rel="stylesheet" href="{% static 'css/signin.css' %}">
 {%endblock%}
 
-{%block title%}
-{%endblock%}
+
 
 
 
@@ -46,9 +47,10 @@
 
                             <!-- Delete Zone -->
                             <span>
-                                <a href="">
-                                    <i class="bi bi-trash3" ></i>
-                                    
+                                <a href="" style="text-decoration: none;">
+                
+                                    <i class="bi bi-trash3 text-black"  data-item-id="{{obj.id}}"></i>
+                                                                       
                                 </a>
                             </span>
 
@@ -78,4 +80,8 @@
     </div>
   </div>
 
+{%endblock%}
+
+{%block javascript%}
+<script src=" {% static './js/table.js' %} "></script>
 {%endblock%}

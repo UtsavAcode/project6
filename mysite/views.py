@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import Register
 from .forms import Login
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     return render(request,'index.html')
@@ -112,3 +114,21 @@ def sign(request):
 
 def home(request):
     return render(request,'main/home.html')
+
+
+
+# deleting the rows: 
+
+def delete_item(request):
+    if request.method=='POST':
+        item_id = request.POST.get('item_id')
+        
+        # Assuming you have a model named 'Item' and want to delete it
+        try:
+            item = Signup.objects.get(pk=item_id)
+            item.delete()
+            return JsonResponse({'message': 'Item deleted successfully'})
+        except Signup.DoesNotExist:
+            return JsonResponse({'message': 'Item not found'}, status=404)
+    
+    return JsonResponse({'message': 'Invalid request method'}, status=400)
