@@ -1,0 +1,73 @@
+{% include '../base/top.html' %}
+{%load static%}
+
+{%block css%}
+<link rel="stylesheet" href="{% static 'css/profile.css'%}">
+{%endblock%}
+
+{%block title%}
+{%endblock%}
+{%block content%}
+<form action="" method="POST" enctype="multipart/form-data">
+       <div class="form-control">
+
+        <h1 class="t">Create Your Profile:</h1>
+         {% csrf_token %}
+         
+        <div class="inp">
+            {{form.image.label_tag}} 
+            {{form.image}}
+        </div>
+
+       <div class="inp">
+         {{form.full_name.label_tag}}
+        {{form.full_name}}
+       </div>
+        
+       <div class="inp">
+        
+        {{form.phone.label_tag}}
+        {{form.phone}}
+        
+        {{form.gender.label_tag}}
+        {{form.gender}}
+        
+        {{form.age.label_tag}}
+        {{form.age}}
+            
+        {{form.currentL.label_tag}}
+        {{form.currentL}}
+        
+
+        {{form.occupation.label_tag}}
+        {{form.occupation}}
+        
+
+        {{form.smoking.label_tag}}
+        {{form.smoking}}
+        
+
+        {{form.pets.label_tag}}
+        {{form.pets}}
+        
+
+        {{form.budget.label_tag}}
+        {{form.budget}}
+        
+
+        {{form.social.label_tag}}
+        {{form.social}}
+
+        {{form.description.label_tag}}
+        {{form.description}}
+
+        <button type="submit">click</button>
+        
+       </div>
+
+       </div>
+        
+
+    </form>
+
+{%endblock%}

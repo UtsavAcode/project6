@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect
 from django.template .loader import render_to_string
 from django.http import HttpResponseRedirect
 from . models import Signup
+from . models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import Register
-from .forms import Login
+from .forms import Profile1
+from django.http import request
+
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -103,7 +106,7 @@ def sign(request):
             user = authenticate(request, username=username, password=password)
             if user is not None: 
                 login(request,user)
-                return redirect("/home/")
+                return redirect("/dash/")
             else:
                 return redirect('/')
                 # messages.info(request,'username incorrect')
@@ -112,23 +115,47 @@ def sign(request):
     return render(request,'forms/signin.html')
 
 
-def home(request):
-    return render(request,'main/home.html')
 
 
 
-# deleting the rows: 
 
-def delete_item(request):
-    if request.method=='POST':
-        item_id = request.POST.get('item_id')
-        
-        # Assuming you have a model named 'Item' and want to delete it
-        try:
-            item = Signup.objects.get(pk=item_id)
-            item.delete()
-            return JsonResponse({'message': 'Item deleted successfully'})
-        except Signup.DoesNotExist:
-            return JsonResponse({'message': 'Item not found'}, status=404)
+
+
+
+
+def profile1(request):
     
-    return JsonResponse({'message': 'Invalid request method'}, status=400)
+    if request.method == "POST":
+        form = Profile1(request.POST, request.FILES)
+        if form.is_valid():
+            profile = Profile (
+                image = request.FILES['image'],
+                 #form.cleaned_data['image'],
+                full_name = form.cleaned_data['full_name'],
+                gender = form.cleaned_data['gender'],
+                age = form.cleaned_data['age'],
+                phone = form.cleaned_data['phone'],
+                currentL = form.cleaned_data['currentL'],
+                occupation = form.cleaned_data['occupation'],
+                smoking = form.cleaned_data['smoking'],
+                pets = form.cleaned_data['pets'],
+                budget = form.cleaned_data['budget'],
+                social = form.cleaned_data['social'],
+                description = form.cleaned_data['description'],
+                
+                
+            )
+
+            profile.save()
+            return HttpResponseRedirect('/dash/')
+    form = Profile1()
+
+
+    return render(request, 'forms/profile1.html',{
+       "form":form
+     })
+
+
+def dash(request):
+    objs = Profile.objects.all()
+    return render(request, 'components/dash.html',{"objs":objs})
