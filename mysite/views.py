@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import Register
+from .forms import Signin
 from .forms import Profile1
 from django.http import request
 
@@ -99,16 +100,18 @@ def register(request):
 # this is the area of login 
 
 def sign(request):
-    if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            user = User.objects.filter(username=username)
-            user = authenticate(request, username=username, password=password)
-            if user is not None: 
-                login(request,user)
-                return redirect("/dash/")
-            else:
-                return redirect('/')
+    if request.method == 'POST':    
+        user_name = request.POST.get('username','')
+        password = request.POST.get('password','')
+        user = authenticate(request, username=user_name,password=password)
+                
+        if user is not None: 
+            login(request,user)
+            return redirect("/dash/")
+                
+               
+  
+        
                 # messages.info(request,'username incorrect')
 
     
@@ -159,3 +162,4 @@ def profile1(request):
 def dash(request):
     objs = Profile.objects.all()
     return render(request, 'components/dash.html',{"objs":objs})
+

@@ -14,7 +14,7 @@ urlpatterns = [
     path('signin/',views.sign,name='sign'),
     path('padmin/',views.admin, name='padmin'),
     path('admin_nav/',views.admin_nav, name='admin_nav'),
-   
+    
     path('admin_login/',views.admin_login, name='admin_login'),
     path('register_table/',views.register_table, name='register_table'),
     path('profile1/',views.profile1, name='profile1'),

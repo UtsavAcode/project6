@@ -15,27 +15,28 @@
 <div class="container">
 <div class="form">
 <h1>Sign In</h1>
-<form action="" method="POST">
+<form action="#" method="POST">
     {% csrf_token %}
     <!-- {{ form1 }} -->
     
 
-    <div class="inp">
+     <div class="inp">
         <ion-icon name="person-circle-outline"></ion-icon>
-        <input type="text" placeholder="E-mail" class="text-center" name="email">
+        <input type="text" placeholder="Username" class="text-center" name="email">
     </div>
     <div class="inp">
         <ion-icon name="lock-closed-outline"></ion-icon>
         <input type="password" placeholder="Password" class="text-center" name="password">
-    </div>
+    </div> 
+
+
+    {% comment %} {{form}} {% endcomment %}
     <div class="check">
         <input type="checkbox">
         <span>Remember Me</span>
     </div>
 
-    {% for message in messages %}
-        <p>{{message}}</p>
-    {% endfor%}
+    
 
     <button type="submit" class="sign btn bg-warning">Sign In</button>
     <span class="regis">Not Registered? <a href="{% url 'register'%}">Register</a></span>
