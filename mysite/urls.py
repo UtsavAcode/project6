@@ -19,6 +19,8 @@ urlpatterns = [
     path('register_table/',views.register_table, name='register_table'),
     path('profile1/',views.profile1, name='profile1'),
     path('dash/', views.dash, name="dash"),
+    path('user_detail/', views.user_detail, name="user_detail"),
+    path('find_roommates/', views.find_roommates, name='find_roommates')
     
     
 ]

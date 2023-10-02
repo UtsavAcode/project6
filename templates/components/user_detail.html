@@ -1,0 +1,30 @@
+{% include '../base/base.html' %}
+{%load static%}
+
+{%block content%}
+ {%obj in objs%}
+<div class="container">
+            <div class="box">
+                <div class="heading">
+                    <h2>{{obj.full_name}}</h2>
+                    <h4>Age: {{obj.age}}</h4>
+                    <h4>Budget: {{obj.budget}}</h4>
+                    <h4>smoking: {{obj.smoking}}</h4>
+                    <h4>Pets: {{obj.pets}}</h4>
+                     <h4>Gender: {{obj.gender}}</h4>
+                     <h4>Location: {{obj.currentL}}</h4>
+                </div>
+
+            <img src="{{obj.image.url}}" alt="" height="200" width="200">
+                <span class="more-details">
+                    {{obj.age}}
+                    {{obj.phone}}
+                    {{obj.currentL}}
+                    {{obj.occupation}}
+                    {{obj.smoking}}
+                    {{obj.pets}}
+                    {{obj.budget}}
+                    {{obj.social}}
+                </span>
+ {%endblock%}
+{%endblock%}

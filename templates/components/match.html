@@ -1,0 +1,55 @@
+{% include '../base/base.html' %}
+{%load static%}
+
+
+{%block css%}
+<link rel="stylesheet" href="{%static 'css/dash.css'%}">
+{%endblock%}
+
+{%block content%}
+    <h1>Matching Roommates: </h1>
+    
+{%for user in matching_users%}
+             <!-- <h1>{{user.full_name}}</h1>
+            <li>{{user.age}}</li> -->
+
+       
+        
+   
+
+    <div class="container">
+            <div class="box">
+                <div class="heading">
+                    <h2>{{user.full_name}}</h2>
+                    <h4>Age: {{user.age}}</h4>
+                    <h4>Budget: {{user.budget}}</h4>
+                    <h4>smoking: {{user.smoking}}</h4>
+                    <h4>Pets: {{user.pets}}</h4>
+                     <h4>Gender: {{user.gender}}</h4>
+                     <h4>Location: {{user.currentL}}</h4>
+                </div>
+
+            <img src="{{user.image.url}}" alt="" height="200" width="200">
+                <span class="more-details" style="display:none">
+                    <!-- {{obj.age}}
+                    {{obj.phone}}
+                    {{obj.currentL}}
+                    {{obj.occupation}}
+                    {{obj.smoking}}
+                    {{obj.pets}}
+                    {{obj.budget}}
+                    {{obj.social}} -->
+                </span>
+               
+
+                <div class="text">
+                    <!-- {{obj.description}}<br> -->
+                    <a href="" class="read-more" id="readMoreLink">Readmore</a>
+                </div>
+            </div>
+        </div>
+
+         {%empty%}
+            <li>No matching roommates found.</li>
+{%endfor%}
+{%endblock%}

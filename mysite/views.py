@@ -101,18 +101,18 @@ def register(request):
 
 def sign(request):
     if request.method == 'POST':    
-        user_name = request.POST.get('username','')
-        password = request.POST.get('password','')
-        user = authenticate(request, username=user_name,password=password)
-                
-        if user is not None: 
-            login(request,user)
-            return redirect("/dash/")
-                
-               
-  
+        login_email = request.POST.get('login_email')
+        login_password = request.POST.get('login_password')
+        user = authenticate(username=login_password, password=login_password)
+
+        if user is not None:
+            login(request, user)
+            messages.success(request, "successfully logged in")
+            return redirect('/dash/')
         
-                # messages.info(request,'username incorrect')
+        else:
+            messages.error(request, "Invalid credentials")
+            
 
     
     return render(request,'forms/signin.html')
@@ -150,7 +150,7 @@ def profile1(request):
             )
 
             profile.save()
-            return HttpResponseRedirect('/dash/')
+            return HttpResponseRedirect('/find_roommates/')
     form = Profile1()
 
 
@@ -163,3 +163,38 @@ def dash(request):
     objs = Profile.objects.all()
     return render(request, 'components/dash.html',{"objs":objs})
 
+def user_detail(request):
+    objs = Profile.objects.all()
+    return render(request, 'components/user_detail.html',{"objs":objs})
+
+
+
+# matching
+
+def find_roommates(request):
+    current_user = Profile.objects.latest('id')
+    users = Profile.objects.exclude(id=current_user.id)
+
+
+    matching_users=[]
+
+    for user in users:
+        if(
+            user.budget - 500 <= current_user.budget<=user.budget + 500
+            and user.currentL == current_user.currentL
+            # and user.age == current_user.age
+            # and abs(user.age- current_user.age)<=5
+            
+        ):
+            matching_users.append(user)
+
+        elif(
+             
+            user.smoking == current_user.smoking
+        ):
+            matching_users.append(user)
+    
+    return render(request, 'components/match.html',{'matching_users':matching_users})
+
+
+                                          
