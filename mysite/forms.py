@@ -9,9 +9,9 @@ class Register(forms.Form):
 
 
 
-class Signin(forms.Form):
-    user_name = forms.CharField(label="Username",max_length=30)
-    password = forms.CharField(label="Password",max_length=20)
+# class Signin(forms.Form):
+#     user_name = forms.CharField(label="Username",max_length=30)
+#     password = forms.CharField(label="Password",max_length=20)
 
 class Profile1(forms.Form):
 

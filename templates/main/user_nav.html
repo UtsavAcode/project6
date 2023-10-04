@@ -1,18 +1,27 @@
-{%load static%}
-{%block css%}
-<link rel="stylesheet" href="{%static 'css/padmin.css'%}">
+{% include '../base/base.html' %}
 
+{%load static%}
+
+{%block css%}
+<link rel="stylesheet" href="{%static 'css/user_nav.css'%}">
 {%endblock%}
 
+{%block navbar%}
+<!--  
 <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
-  <div class="container-fluid">
+  
       <a class="navbar-brand" href="{%url 'index'%}"><span class="text-warning">Roommate</span>Finder</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      
+     
+          
+        
       <form class="d-flex ms-auto" role="search">
+        <a href="" id="btn-nav" class="">
+            <i class="bi bi-bell text-black"></i>
+          </a>
         <div class="input-group">
          <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
           <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
@@ -20,6 +29,7 @@
       </form>
       <ul class="navbar-nav  mb-2 mb-lg-0">
        
+        
         <li class="nav-item dropdown ">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
            <i class="bi bi-person-circle bi-lg"></i>
@@ -35,14 +45,37 @@
       </ul>
     </div>
   </div>
-</nav> 
+</nav>  -->
 
-<!-- Navbar end -->
+<header>
+  <input type="checkbox" name="" id="chk1">
+  
+  <div class="logo"><h1><a class="navbar-brand" href="{%url 'index'%}"><span class="text-warning">Roommate</span>Finder</a></h1></div>
+  <div class="search-box">
+    <form action="">
+      <input type="text" name="search" id="srch" placeholder="Search">
+      <button type="submit">
+        <span class="ss">
+          <i class="bi bi-search text-black"></i>
+        </span>
+      </button>
+    </form>
+  </div>
+
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Matches</a></li>
+    <li><a href="#"><i class="bi bi-bell"></i></a></li>
+    <li><a href="#"><i class="bi bi-chat-dots-fill"></i></a></li>
+  </ul>
+
+  <div class="menu">
+    <label for="chk1">
+      <i class="bi bi-ui-checks-grid"></i>
+    </label>
+  </div>
+</header>
 
 
-
-
-
-
-<!-- Sidebar end -->
+{%endblock%}
 

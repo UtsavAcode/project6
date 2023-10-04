@@ -51,6 +51,17 @@ form .inp{
   
 }
 
+label{
+  
+  /* margin-bottom: 30px; */
+  margin-left: 610px;
+  color: black;
+  font-size: 24px;
+  margin-bottom: 5px;
+
+  
+}
+
 form .inp input{
   height: 100%;
   width: 100%;

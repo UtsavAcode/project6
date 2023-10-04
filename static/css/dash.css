@@ -12,8 +12,10 @@
 
 .container{
     width: 100%;
-    
+       
 }
+
+
 
 .box{
     max-width: 350px;
@@ -39,6 +41,7 @@
     min-width: 300px;
 }
 
+
 h2 h4{
     text-transform: uppercase;
 }
@@ -62,9 +65,11 @@ p{
     background-color: rgb(168, 163, 163);
 }
 
-.container-fluid{
+/* .container-fluid{
     height: 100%;
-}
+} */
+
+
 
 @media (min-width: 700px){
     .container{

@@ -14,12 +14,36 @@
 <div class="container">
 <div class="form">
 <h1>Register</h1>
- <form action="" method="POST">
+ <form action="register" method="POST">
     {% csrf_token %}
-    {{form}}
-    <!-- {{ form.user_name.label_tag }}
-    {{ form.user_name }}
-    {{ form.user_name.errors}} -->
+    {% comment %} {{form}} {% endcomment %}
+
+        <!-- {{ form.user_name.label_tag }} -->
+    <label for="username">Username</label>
+    <div class="inp">
+        
+        {{ form.user_name }}
+        {{ form.user_name.errors}}
+    </div>
+
+    <label for="email">Email</label>
+    <div class="inp">
+            {{form.email}}
+            {{form.email.errors}}
+    </div>
+
+
+    <label for="phone">Phone</label>
+    <div class="inp">
+            {{form.phone}}
+            {{form.phone.errors}}
+    </div>
+
+    <label for="password">Password</label>
+    <div class="inp">
+            {{form.password}}
+            {{form.password.errors}}
+    </div>
 
 <button type="submit" class="sign btn bg-warning">Sign Up</button>
 <span class="regis">Already have an account ? <a href="{%url 'sign'%}">Sign in</a></span>

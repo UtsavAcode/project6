@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import Register
-from .forms import Signin
+# from .forms import Signin
 from .forms import Profile1
 from django.http import request
 
@@ -103,7 +103,7 @@ def sign(request):
     if request.method == 'POST':    
         login_email = request.POST.get('login_email')
         login_password = request.POST.get('login_password')
-        user = authenticate(username=login_password, password=login_password)
+        user = authenticate(username=login_email, password=login_password)
 
         if user is not None:
             login(request, user)
@@ -161,11 +161,11 @@ def profile1(request):
 
 def dash(request):
     objs = Profile.objects.all()
-    return render(request, 'components/dash.html',{"objs":objs})
+    return render(request, 'main/dash.html',{"objs":objs})
 
 def user_detail(request):
     objs = Profile.objects.all()
-    return render(request, 'components/user_detail.html',{"objs":objs})
+    return render(request, 'main/user_detail.html',{"objs":objs})
 
 
 
@@ -194,7 +194,10 @@ def find_roommates(request):
         ):
             matching_users.append(user)
     
-    return render(request, 'components/match.html',{'matching_users':matching_users})
+    return render(request, 'main/match.html',{'matching_users':matching_users})
 
 
-                                          
+# user navigation
+
+def user_nav(request):
+    return render(request,'main/user_nav.html')
