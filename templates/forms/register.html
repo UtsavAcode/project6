@@ -14,11 +14,11 @@
 <div class="container">
 <div class="form">
 <h1>Register</h1>
- <form action="register" method="POST">
+ <form action="" method="POST">
     {% csrf_token %}
-    {% comment %} {{form}} {% endcomment %}
+    <!-- {% comment %} {{form}} {% endcomment %} -->
 
-        <!-- {{ form.user_name.label_tag }} -->
+        <!-- {{ form.user_name.label_tag }}
     <label for="username">Username</label>
     <div class="inp">
         
@@ -43,10 +43,30 @@
     <div class="inp">
             {{form.password}}
             {{form.password.errors}}
+    </div> -->
+
+    <div class="inp">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <input type="text" placeholder="Username" class="text-center" name="user_name">
+    </div>
+
+    <div class="inp">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <input type="email" placeholder="Email" class="text-center" name="email">
+    </div>
+    
+    <div class="inp">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <input type="number" placeholder="Phone" class="text-center" name="phone">
+    </div>
+    
+    <div class="inp">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <input type="password" placeholder="Password" class="text-center" name="password">
     </div>
 
 <button type="submit" class="sign btn bg-warning">Sign Up</button>
-<span class="regis">Already have an account ? <a href="{%url 'sign'%}">Sign in</a></span>
+<span class="regis">Already have an account ? <a href="{%url 'signin'%}">Sign in</a></span>
 
 </form>
 

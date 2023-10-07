@@ -6,15 +6,15 @@
 <link rel="stylesheet" href="{%static 'css/dash.css'%}">
 {%endblock%}
 
-{% block navbar %}
-    {%include './user_nav.html'%}
- {%endblock%}
+ {% block navbar %}
+  {% include 'main/user_nav.html' %}
+ {% endblock navbar %}
 
 {%block content%}
 
 
     
-
+<h1>Welcome</h1>
     {%for obj in objs%}
         <div class="container">
             <div class="box">

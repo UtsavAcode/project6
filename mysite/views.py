@@ -10,6 +10,7 @@ from .forms import Register
 # from .forms import Signin
 from .forms import Profile1
 from django.http import request
+from django.contrib.auth.hashers import make_password,check_password
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -72,25 +73,40 @@ def admin_login(request):
 # this is the area for the register:
 
 def register(request):
-
     if request.method == 'POST':
-        form = Register(request.POST)
+        name= request.POST.get('user_name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        password = request.POST.get('password')
+        normalized_email = email.lower()
+        hashed_password = make_password(password)
 
-        if form.is_valid():
-            signup = Signup(user_name=form.cleaned_data['user_name'],
-                            email=form.cleaned_data['email'],
-                            phone=form.cleaned_data['phone'],
-                            password=form.cleaned_data['password'],
-                            )
-            signup.save()
-            return HttpResponseRedirect("/signin/")
+        email_exists = Signup.objects.filter(email = normalized_email).exists()
+        phone_exists = Signup.objects.filter(phone = phone).exists()
 
+        if email_exists:
+            message = "Email is taken"
         
-    form = Register()
-   
-    return render(request,'forms/register.html',{
-       "form":form
-     })
+        if phone_exists:
+            message = "Phone is taken"
+
+        if email_exists or phone_exists:
+            message.error(request, message)
+            return redirect(request,'/register/')
+        
+        else:
+            user = Signup(user_name = name, email = normalized_email, phone = phone, password = hashed_password) 
+
+            try:
+                user.save()
+                request.session['email'] = normalized_email
+                return redirect('/signin/')
+            
+            except Exception as e:
+                pass
+
+    return render(request,'forms/register.html')
+
 
 
 
@@ -99,33 +115,34 @@ def register(request):
 
 # this is the area of login 
 
-def sign(request):
+def signin(request):
     if request.method == 'POST':    
-        login_email = request.POST.get('login_email')
-        login_password = request.POST.get('login_password')
-        user = authenticate(username=login_email, password=login_password)
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        normalized_email = email.lower()
 
-        if user is not None:
-            login(request, user)
-            messages.success(request, "successfully logged in")
-            return redirect('/dash/')
-        
-        else:
-            messages.error(request, "Invalid credentials")
+        try:
+            user = Signup.objects.get(email=normalized_email)
+            password_matched = check_password(password,user.password)
             
-
-    
+            if password_matched:
+                request.session['email'] = normalized_email
+                return redirect('/profile1/')
+            else:
+                messages.error(request,"Incorrect password")
+                return redirect('/signin/')
+            
+        except Signup.DoesNotExist as e:
+            print(e)
+            messages.error(request,"Account doesnot exist")
+            return redirect('/signin/')
+        
+   
     return render(request,'forms/signin.html')
 
 
 
-
-
-
-
-
-
-
+# User Profile creation 
 def profile1(request):
     
     if request.method == "POST":
@@ -150,7 +167,7 @@ def profile1(request):
             )
 
             profile.save()
-            return HttpResponseRedirect('/find_roommates/')
+            return HttpResponseRedirect('/dash/')
     form = Profile1()
 
 
@@ -171,7 +188,7 @@ def user_detail(request):
 
 # matching
 
-def find_roommates(request):
+def find_roomates(request):
     current_user = Profile.objects.latest('id')
     users = Profile.objects.exclude(id=current_user.id)
 

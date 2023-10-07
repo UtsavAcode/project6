@@ -12,7 +12,7 @@ urlpatterns = [
     path('services/', views.services,name='services'),
     path('compteam/',views.team,name='team'),
     path('register/',views.register,name='register'),
-    path('signin/',views.sign,name='sign'),
+    path('signin/',views.signin,name='signin'),
     path('padmin/',views.admin, name='padmin'),
     path('admin_nav/',views.admin_nav, name='admin_nav'),
     
@@ -21,7 +21,7 @@ urlpatterns = [
     path('profile1/',views.profile1, name='profile1'),
     path('dash/', views.dash, name='dash'),
     path('user_detail/', views.user_detail, name="user_detail"),
-    path('find_roommates/', views.find_roommates, name='find_roommates'),
+    path('find_roomates/', views.find_roomates, name='find_roomates'),
     path('user_nav/',views.user_nav,name='user_nav'),
     
     
