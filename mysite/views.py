@@ -11,7 +11,7 @@ from .forms import Register
 from .forms import Profile1
 from django.http import request
 from django.contrib.auth.hashers import make_password,check_password
-
+from django.db.models import Q
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -150,7 +150,6 @@ def profile1(request):
         if form.is_valid():
             profile = Profile (
                 image = request.FILES['image'],
-                 #form.cleaned_data['image'],
                 full_name = form.cleaned_data['full_name'],
                 gender = form.cleaned_data['gender'],
                 age = form.cleaned_data['age'],
@@ -169,6 +168,7 @@ def profile1(request):
             profile.save()
             return HttpResponseRedirect('/dash/')
     form = Profile1()
+    
 
 
     return render(request, 'forms/profile1.html',{
@@ -218,3 +218,27 @@ def find_roomates(request):
 
 def user_nav(request):
     return render(request,'main/user_nav.html')
+
+# Delete
+def delete(request):
+    return render(request, 'admin/delete.html')
+
+# Update
+def update(request):
+    return render(request, 'admin/update.html')
+
+def update_profile(request):
+    return render(request, 'forms/profile1.html')
+
+def search(request):
+    
+    query = request.GET.get('search','')
+    
+    profiles = Profile.objects.all()
+
+    if query:
+        profiles = profiles.filter(
+            Q(full_name__icontains=query)| Q(currentL__icontains=query| Q(age__icontains=query)| Q(budget__icontains=query)| Q(occupation__icontains=query)| Q(gender__icontains=query))
+        )
+    
+    return render(request, 'main/search.html',{'profiles':profiles, 'query':query})

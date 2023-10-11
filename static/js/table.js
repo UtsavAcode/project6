@@ -1,17 +1,12 @@
-  $(document).on('click', '.bi', function () {
-            var itemId = $(this).data('item-id');
+document.getElementById('delete').addEventListener('click', function(event){
+    var confirmed = window.confirm('Are you sure you want to delete this?');
 
-            // Send an AJAX request to delete the item
-            $.ajax({
-                type: 'POST',
-                url: '/delete-item/', // Replace with your Django URL
-                data: {
-                    'item_id': itemId,
-                    csrfmiddlewaretoken: '{{ csrf_token }}' // Include the CSRF token
-                },
-                success: function () {
-                    // Remove the table row on success
-                    $(this).closest('tr').remove();
-                }
-            });
-        });
+    if(confirmed){
+        alert('Deleted successfully.');
+    }
+
+    else{
+        event.preventDefault();
+    }
+
+});

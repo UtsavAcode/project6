@@ -63,6 +63,9 @@ p{
     padding: 10px 20px;
 }
 
+.more-details{
+    display: none;
+}
 
 
 .navbar,.container-fluid{
