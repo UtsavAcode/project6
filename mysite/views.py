@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect 
 from django.template .loader import render_to_string
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from . models import Signup
 from . models import Profile
 from django.contrib.auth.models import User
@@ -14,6 +15,8 @@ from django.contrib.auth.hashers import make_password,check_password
 from django.db.models import Q
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 def index(request):
     return render(request,'index.html')
@@ -242,3 +245,14 @@ def search(request):
         )
     
     return render(request, 'main/search.html',{'profiles':profiles, 'query':query})
+
+
+
+def delete_row(request, row_id):
+    try:
+        Signup.objects.get(pk=row_id).delete()
+        return JsonResponse({'message': 'Deleted successfully.'}, status=200)
+    except Signup.DoesNotExist:
+        return JsonResponse({'message': 'Item not found.'}, status=404)
+    except Exception as e:
+        return JsonResponse({'message': 'Error deleting item.'}, status=500)

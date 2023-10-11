@@ -27,7 +27,7 @@
                     style="width: 100%"
                   >
                     <thead>
-                      <tr>
+                      <tr >
                         <th>Id</th>
                         <th>Username</th>
                         <th>Email</th>
@@ -37,7 +37,7 @@
                     </thead>
                     <tbody>
                       {% for obj in objs %}
-                      <tr>
+                      <tr data-row-id="{{ obj.id }}">
                         <td>{{obj.id}}</td>
                         <td>{{obj.user_name}}</td>
                         <td>{{obj.email }}</td>
@@ -46,8 +46,8 @@
                         <td>
 
                             <!-- Delete Zone -->
-                            <span class="btn btn-danger text-light text-center">              
-                                  <a href="#" class="text-light text-decoration-none" id="delete">
+                            <span class="btn btn-danger text-light text-center" id="delete" data-id="{{obj.id}}">              
+                                  <a href="#" class="text-light text-decoration-none">
                                     Delete
                                   </a>
                             </span>
@@ -62,15 +62,6 @@
                       </tr>
                       {% endfor %}
                     </tbody>
-                    <tfoot>
-                      <!-- <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                      </tr> -->
                     </tfoot>
                   </table>
         </div>
