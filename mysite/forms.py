@@ -25,7 +25,7 @@ class Profile1(forms.Form):
     smoking = forms.CharField(label="Smoking?", max_length=10)
     pets = forms.CharField(label="Pets",max_length=50)
     budget = forms.IntegerField(label="Your Budget")
-    social = forms.IntegerField(label="Your Social Media")
+    social = forms.CharField(label="Your Social Media")
     description = forms.CharField(
         widget=forms.Textarea(attrs={'rows': 4, 'cols': 50}),  # Adjust rows and cols as needed
         label='About you'

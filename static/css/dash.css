@@ -63,9 +63,6 @@ p{
     padding: 10px 20px;
 }
 
-.more-details{
-    display: none;
-}
 
 
 .navbar,.container-fluid{
@@ -105,6 +102,55 @@ p{
 .slider-content{
     padding:20px;
 }
+
+.close .close-slider{
+    left: 0;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.image-container img{
+     border-radius: 50%;
+}
+
+.details{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.card-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+
+.social{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.connect{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 
 
