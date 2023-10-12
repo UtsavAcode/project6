@@ -54,7 +54,7 @@
 
                             <!-- Update zone -->
                             <span class="btn btn-primary text-light text-center">
-                               <a href="{%url 'update'%}" class="text-light text-decoration-none">
+                               <a href="{%url 'update'%}?email={{ obj.email }}" class="text-light text-decoration-none" data-id="{{obj.id}}">
                                 Edit
                                </a>
                             </span>

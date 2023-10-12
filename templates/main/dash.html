@@ -39,14 +39,20 @@
                     {{obj.budget}}
                     {{obj.social}}
                 </span>
-               
-
+               <div class="slider-overlay"></div>
+                <div class="slider">
+                    <div class="slider-content">
+                        <a href="" class="close-slider" id="closeSliderLink">Close</a>
+                            <h4>profile name:</h4>
+                    </div>
+                </div>
                 <div class="text">
                     <!-- {{obj.description}}<br> -->
                     <a href="" class="read-more" id="readMoreLink">Readmore</a>
                 </div>
             </div>
         </div>
+        
     {%endfor%}
 
 </div>
@@ -58,4 +64,5 @@
 
 {%block javascript%}
 <script src=" {% static './js/dash.js' %} "></script>
+<script src=" {% static './js/slider.js' %} "></script>
 {%endblock%}

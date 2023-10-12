@@ -17,6 +17,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django.shortcuts import render, redirect, get_object_or_404
 
 def index(request):
     return render(request,'index.html')
@@ -88,13 +89,13 @@ def register(request):
         phone_exists = Signup.objects.filter(phone = phone).exists()
 
         if email_exists:
-            message = "Email is taken"
+            messages.error(request,"Email is taken")
         
         if phone_exists:
-            message = "Phone is taken"
+            messages.error(request,"Phone is taken")
 
         if email_exists or phone_exists:
-            message.error(request, message)
+            
             return redirect(request,'/register/')
         
         else:
@@ -228,7 +229,37 @@ def delete(request):
 
 # Update
 def update(request):
-    return render(request, 'admin/update.html')
+    if request.method == 'GET':
+        email = request.GET.get('email')
+        try:
+            obj = Signup.objects.get(email=email)
+        except Signup.DoesNotExist:
+            return HttpResponse("User not found", status=404)
+
+        return render(request, 'admin/update.html', {'obj': obj})
+
+    elif request.method == 'POST':
+        email = request.POST.get('email')
+        user_name = request.POST.get('user_name')
+        phone = request.POST.get('phone')
+
+        try:
+            obj = Signup.objects.get(email=email)
+            obj.user_name = user_name
+            obj.phone = phone
+            obj.save()
+        except Signup.DoesNotExist:
+            return HttpResponse("User not found", status=404)
+
+        return redirect('/register_table')
+
+
+
+
+
+
+
+
 
 def update_profile(request):
     return render(request, 'forms/profile1.html')
@@ -241,9 +272,11 @@ def search(request):
 
     if query:
         profiles = profiles.filter(
-            Q(full_name__icontains=query)| Q(currentL__icontains=query| Q(age__icontains=query)| Q(budget__icontains=query)| Q(occupation__icontains=query)| Q(gender__icontains=query))
-        )
-    
+            Q(full_name__icontains=query) | Q(currentL__icontains=query) | Q(age__icontains=query) | Q(budget__icontains=query) | Q(occupation__icontains=query) | Q(gender__icontains=query))
+        
+    if not profiles:
+        return redirect('/dash/')
+
     return render(request, 'main/search.html',{'profiles':profiles, 'query':query})
 
 

@@ -76,6 +76,36 @@ p{
     height: 100%;
 } */
 
+/* slider */
+
+.slider{
+    position:fixed;
+    top: 0;
+    right: -50%;
+    width: 50%;
+    height: 100%;
+    background-color: #fff;
+    overflow-y: scroll;
+    transition: right 0.3s;
+    z-index: 999;
+    box-shadow: 5px 5px 10px #888888;
+}
+
+.slider-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: none;
+    z-index: 998;
+}
+
+.slider-content{
+    padding:20px;
+}
+
 
 
 @media (min-width: 700px){

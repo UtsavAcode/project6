@@ -14,37 +14,9 @@
 <div class="container">
 <div class="form">
 <h1>Register</h1>
- <form action="{%url 'register'%}" method="POST">
+ <form action="{% url 'register' %}" method="POST">
     {% csrf_token %}
-    <!-- {% comment %} {{form}} {% endcomment %} -->
-
-        <!-- {{ form.user_name.label_tag }}
-    <label for="username">Username</label>
-    <div class="inp">
-        
-        {{ form.user_name }}
-        {{ form.user_name.errors}}
-    </div>
-
-    <label for="email">Email</label>
-    <div class="inp">
-            {{form.email}}
-            {{form.email.errors}}
-    </div>
-
-
-    <label for="phone">Phone</label>
-    <div class="inp">
-            {{form.phone}}
-            {{form.phone.errors}}
-    </div>
-
-    <label for="password">Password</label>
-    <div class="inp">
-            {{form.password}}
-            {{form.password.errors}}
-    </div> -->
-
+    
     <div class="inp">
         <ion-icon name="person-circle-outline"></ion-icon>
         <input type="text" placeholder="Username" class="text-center" name="user_name">

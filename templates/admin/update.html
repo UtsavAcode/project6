@@ -14,30 +14,27 @@
 <div class="container">
 <div class="form">
 <h1>Register</h1>
- <form action="{%url 'register'%}" method="POST">
+ <form action="{%url 'update'%}" method="POST">
     {% csrf_token %}
     
-
+    
       
     <div class="inp">
         <ion-icon name="person-circle-outline"></ion-icon>
-        <input type="text" placeholder="Username" class="text-center" name="user_name" value="">
+        <input type="text" placeholder="Username" class="text-center" name="user_name" value="{{obj.user_name}}">
     </div>
 
     <div class="inp">
         <ion-icon name="person-circle-outline"></ion-icon>
-        <input type="email" placeholder="Email" class="text-center" name="email">
+        <input type="email" placeholder="Email" class="text-center" name="email" value="{{ obj.email }}">
     </div>
     
     <div class="inp">
         <ion-icon name="person-circle-outline"></ion-icon>
-        <input type="number" placeholder="Phone" class="text-center" name="phone">
+        <input type="number" placeholder="Phone" class="text-center" name="phone" value="{{ obj.phone}}">
     </div>
     
-    <div class="inp">
-        <ion-icon name="person-circle-outline"></ion-icon>
-        <input type="password" placeholder="Password" class="text-center" name="password">
-    </div>
+    
     
 
 <button type="submit" class="sign btn bg-warning">Update</button>
