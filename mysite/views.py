@@ -182,6 +182,7 @@ def profile1(request):
 
 def dash(request):
     objs = Profile.objects.all()
+    
     return render(request, 'main/dash.html',{"objs":objs})
 
 def user_detail(request):
@@ -214,13 +215,16 @@ def find_roomates(request):
             user.smoking == current_user.smoking
         ):
             matching_users.append(user)
+
+        num_matches = len (matching_users)
     
-    return render(request, 'main/match.html',{'matching_users':matching_users})
+    return render(request, 'main/match.html',{'matching_users':matching_users,'num_matches':num_matches})
 
 
 # user navigation
 
 def user_nav(request):
+    
     return render(request,'main/user_nav.html')
 
 # Delete
