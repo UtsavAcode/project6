@@ -12,8 +12,6 @@
 
 {%block content%}
 
-
-    
 <h1>Welcome</h1>
     {%for obj in objs%}
         <div class="container">
@@ -29,8 +27,8 @@
                 </div>
 
                 <img src="{{obj.image.url}}" alt="" height="200" width="200">
-                <div class="text">
-                    <!-- {{obj.description}}<br> -->
+                
+                <div class="text">                    
                     <a href="" class="read-more" id="readMoreLink">Readmore</a>
                 </div>
     
@@ -92,9 +90,6 @@
     {%endfor%}
 
 </div>
-
-
-
 
 {%endblock%}
 

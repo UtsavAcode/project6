@@ -4,8 +4,6 @@
 
 {%block css%}
 <link rel="stylesheet" href="{%static 'css/dash.css'%}">
-
-
 {%endblock%}
 
  {% block navbar %}
@@ -19,8 +17,7 @@
     <br><br><br>
     <h1 class="heading2"> These are the people that have a match with you </h1>
 {%for user in matching_users%}
-             <!-- <h1>{{user.full_name}}</h1>
-            <li>{{user.age}}</li> -->
+            
 
     <div class="container">
             <div class="box">
@@ -35,26 +32,68 @@
                 </div>
 
             <img src="{{user.image.url}}" alt="" height="200" width="200">
-                <span class="more-details" style="display:none">
-                    <!-- {{obj.age}}
-                    {{obj.phone}}
-                    {{obj.currentL}}
-                    {{obj.occupation}}
-                    {{obj.smoking}}
-                    {{obj.pets}}
-                    {{obj.budget}}
-                    {{obj.social}} -->
-                </span>
                
 
-                <div class="text">
-                    <!-- {{obj.description}}<br> -->
+                <div class="text">                    
                     <a href="" class="read-more" id="readMoreLink">Readmore</a>
                 </div>
-            </div>
-        </div>
+
 
          {%empty%}
             <li>No matching roommates found.</li>
+            
+                <!-- slider Area -->
+               <div class="slider-overlay"></div>
+                <div class="slider">
+                    <div class="slider-content">
+                        <span class="close">
+                            <a href="" class="close-slider text-decoration-none" id="closeSliderLink">
+                                <i class="bi bi-x-lg text-black m-auto"></i>
+                            </a>
+                        </span>                           
+
+                            <div class="card" style="width: 100%;">                                    
+                                        <div class="image-container">
+                                            <img src="{{user.image.url}}" class="card-img-top" alt="" height="200" width="200">
+                                        </div>
+
+                                   
+                                        <div class="card-body">
+                                            <h5 class="card-title fs-1 fw-bold">{{user.full_name}}</h5>
+                                            <p class="card-text">
+                                            <div class="details">
+                                                
+                                                <div class="left">
+                                                    <p><span class="fw-bold fs-5">Age:</span> {{user.age}}</p>
+                                                    <p><span class="fw-bold fs-5">Budget:</span> {{user.budget}}</p>
+                                                    <p><span class="fw-bold fs-5">Smoking:</span> {{user.smoking}}</p>
+                                                    <p><span class="fw-bold fs-5">Gender:</span> {{user.gender}}</p>
+                                                    <p><span class="fw-bold fs-5">Location:</span> {{user.currentL}}</p>
+                                                </div>
+                                                <div class="right">
+                                                    <p><span class="fw-bold fs-5">Phone no:</span> {{user.phone}}</p>
+                                                    <p><span class="fw-bold fs-5">Occupation:</span> {{user.occupation}}</p>                                                    
+                                                    <p><span class="fw-bold fs-5">Pets:</span> {{user.pets}}</p>
+                                                    <p><span class="fw-bold fs-5">Budget:</span> {{user.budget}}</p>
+                                                </div>                                                   
+                                            </div>
+                                                <div class="info">
+                                                    <div class="social"><p><span class="fw-bold fs-5">Social media:</span> <br>{{user.social}}</p></div>
+                                                    <div class="about">{{user.description}}</div>
+                                                </div>
+                                             </p>
+                                                 <div class="connect">
+                                                    <a href="#" class="btn btn-warning">Connect</a>
+                                                 </div>
+                                        </div>
+                                    </div>
+                                 </div>
+                            </div>
+                </div>
+                </div>
+            </div>
 {%endfor%}
+
+
 {%endblock%}
+
