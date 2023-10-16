@@ -3,7 +3,7 @@
 
 
 {%block css%}
-<link rel="stylesheet" href="{%static 'css/dash.css'%}">
+<link rel="stylesheet" href="{%static 'css/match.css'%}">
 {%endblock%}
 
  {% block navbar %}
@@ -39,8 +39,7 @@
                 </div>
 
 
-         {%empty%}
-            <li>No matching roommates found.</li>
+        
             
                 <!-- slider Area -->
                <div class="slider-overlay"></div>
@@ -92,8 +91,14 @@
                 </div>
                 </div>
             </div>
+             {%empty%}
+            <li>No matching roommates found.</li>
 {%endfor%}
 
 
 {%endblock%}
 
+{%block javascript%}
+<script src=" {% static './js/dash.js' %} "></script>
+<script src=" {% static './js/slider.js' %} "></script>
+{%endblock%}

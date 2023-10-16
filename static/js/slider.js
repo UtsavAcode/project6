@@ -33,3 +33,4 @@ closeSliderLinks.forEach(function (closeLink, index) {
         overlay.style.display = 'none';
     });
 });
+

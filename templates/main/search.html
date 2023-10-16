@@ -1,55 +1,102 @@
 {% include '../base/base.html' %}
 {%load static%}
 
+
 {%block css%}
-    <link rel="stylesheet" href="{%static 'css/dash.css'%}">
+<link rel="stylesheet" href="{%static 'css/dash.css'%}">
 {%endblock%}
 
-{%block navbar%}
-    {%include 'main/user_nav.html'%}
-{%endblock%}
+ {% block navbar %}
+  {% include 'main/user_nav.html' %}
+ {% endblock navbar %}
 
 {%block content%}
 <h2>Search Results: </h2><br><br><br>
 <span class="mt-4"><h2>Search Results for:{{ query }}</h2></span>
 <div class="container">
-    
-    {% for profile in profiles %}
+
+
+    {%for profile in profiles%}
+        <div class="container">
             <div class="box">
                 <div class="heading">
-                    
-                    <h2>{{ profile.full_name }}</h2>
-                    <h4>Age: {{ profile.age }}</h4>
-                    <h4>Budget: {{ profile.budget }}</h4>
-                    <h4>smoking: {{ profile.smoking }}</h4>
-                    <h4>Pets: {{ profile.pets }}</h4>
-                     <h4>Gender: {{ profile.gender }}</h4>
-                     <h4>Location: {{ profile.currentL }}</h4>
+                    <h2>{{profile.full_name}}</h2>
+                    <h4>Age: {{profile.age}}</h4>
+                    <h4>Budget: {{profile.budget}}</h4>
+                    <h4>smoking: {{profile.smoking}}</h4>
+                    <h4>Pets: {{profile.pets}}</h4>
+                     <h4>Gender: {{profile.gender}}</h4>
+                     <h4>Location: {{profile.currentL}}</h4>
                 </div>
 
-            <img src="{{profile.image.url}}" alt="" height="200" width="200">
-                <span class="more-details">
-                    <!-- {{obj.age}}
-                    {{obj.phone}}
-                    {{obj.currentL}}
-                    {{obj.occupation}}
-                    {{obj.smoking}}
-                    {{obj.pets}}
-                    {{obj.budget}}
-                    {{obj.social}} -->
-                </span>
-               
-
-                <div class="text">
-                    <!-- {{obj.description}}<br> -->
+                <img src="{{profile.image.url}}" alt="" height="200" width="200">
+                
+                <div class="text">                    
                     <a href="" class="read-more" id="readMoreLink">Readmore</a>
                 </div>
-            </div>
-        
     
-    {%endfor%}
+                <!-- slider Area -->
+               <div class="slider-overlay"></div>
+                <div class="slider">
+                    <div class="slider-content">
+                        <span class="close">
+                            <a href="" class="close-slider text-decoration-none" id="closeSliderLink">
+                                <i class="bi bi-x-lg text-black m-auto"></i>
+                            </a>
+                        </span>                           
 
+                            <div class="card" style="width: 100%;">                                    
+                                        <div class="image-container">
+                                            <img src="{{profile.image.url}}" class="card-img-top" alt="" height="200" width="200">
+                                        </div>
+
+                                   
+                                        <div class="card-body">
+                                            <h5 class="card-title fs-1 fw-bold">{{obj.full_name}}</h5>
+                                            <p class="card-text">
+                                            <div class="details">
+                                                
+                                                <div class="left">
+                                                    <p><span class="fw-bold fs-5">Age:</span> {{profile.age}}</p>
+                                                    <p><span class="fw-bold fs-5">Budget:</span> {{profile.budget}}</p>
+                                                    <p><span class="fw-bold fs-5">Smoking:</span> {{profile.smoking}}</p>
+                                                    <p><span class="fw-bold fs-5">Gender:</span> {{profile.gender}}</p>
+                                                    <p><span class="fw-bold fs-5">Location:</span> {{profile.currentL}}</p>
+                                                </div>
+                                                <div class="right">
+                                                    <p><span class="fw-bold fs-5">Phone no:</span> {{profile.phone}}</p>
+                                                    <p><span class="fw-bold fs-5">Occupation:</span> {{profile.occupation}}</p>                                                    
+                                                    <p><span class="fw-bold fs-5">Pets:</span> {{profile.pets}}</p>
+                                                    <p><span class="fw-bold fs-5">Budget:</span> {{profile.budget}}</p>
+                                                </div>                                                   
+                                            </div>
+                                                <div class="info">
+                                                    <div class="social"><p><span class="fw-bold fs-5">Social media:</span> <br>{{profile.social}}</p></div>
+                                                    <div class="about">{{profile.description}}</div>
+                                                </div>
+                                             </p>
+                                                 <div class="connect">
+                                                    <a href="#" class="btn btn-warning">Connect</a>
+                                                 </div>
+                                        </div>
+                                    </div>
+                                 </div>
+                            </div>
+                </div>
+                <!--Slider end  -->
+
+
+                
+            </div>
+        </div>
+        
+    {%endfor%}
 
 </div>
 
+{%endblock%}
+
+{%block javascript%}
+<script src=" {% static './js/dash.js' %} "></script>
+<script src=" {% static './js/slider.js' %} "></script>
 {%endblock%}
