@@ -26,6 +26,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('delete/<int:row_id>/', views.delete_row, name='delete_row'),
     
+    
 ]
 
 # if settings.DEBUG:

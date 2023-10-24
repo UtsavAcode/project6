@@ -18,6 +18,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from .models import ConnectionRequest
 
 def index(request):
     return render(request,'index.html')
@@ -131,7 +134,17 @@ def signin(request):
             
             if password_matched:
                 request.session['email'] = normalized_email
-                return redirect('/profile1/')
+                # return redirect('/profile1/')
+                # Check if the user already has a profile (assuming a ForeignKey relationship)
+                if hasattr(user, 'profile'):
+                    # If a profile exists, redirect to the dashboard
+                    print("Redirecting to dashboard")
+                    return redirect('/dash/')
+                else:
+                    # If no profile exists, redirect to profile creation
+                    print("Redirecting to profile")
+                    return redirect('/profile1/')
+                
             else:
                 messages.error(request,"Incorrect password")
                 return redirect('/signin/')
@@ -180,9 +193,12 @@ def profile1(request):
      })
 
 
+
+
 def dash(request):
     objs = Profile.objects.all()
-    
+   
+
     return render(request, 'main/dash.html',{"objs":objs})
 
 def user_detail(request):
@@ -224,8 +240,11 @@ def find_roomates(request):
 # user navigation
 
 def user_nav(request):
-    
-    return render(request,'main/user_nav.html')
+    if request.user.is_authenticated:
+        profile_picture = request.user.profile.image.url if hasattr(request.user, 'profile') and request.user.profile.image else None
+    else:
+        profile_picture = None
+    return render(request,'main/user_nav.html',{'profile_picture': profile_picture})
 
 # Delete
 def delete(request):
@@ -293,3 +312,9 @@ def delete_row(request, row_id):
         return JsonResponse({'message': 'Item not found.'}, status=404)
     except Exception as e:
         return JsonResponse({'message': 'Error deleting item.'}, status=500)
+    
+
+
+
+# views.py
+

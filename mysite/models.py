@@ -27,5 +27,14 @@ class Profile (models.Model):
     description =models.CharField("description",default='',max_length=70)
     
 
-    # def image(self):
-    #     return format_html('<img src="/media/{}" height=30 width=30 style="border-radius:50%">'.format(self.image_name))
+#    connections
+
+
+
+class ConnectionRequest(models.Model):
+    from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_requests')
+    to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_requests')
+    is_accepted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.from_user.username} to {self.to_user.username}"

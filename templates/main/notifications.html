@@ -1,0 +1,19 @@
+<!-- notifications.html -->
+
+<div id="notificationSlider" class="slider">
+    <span class="close">
+        <a href="#" class="close-slider text-decoration-none">
+            <i class="bi bi-x-lg text-black m-auto"></i>
+        </a>
+    </span>
+    <h3>Connection Requests</h3>
+    <ul>
+        {% for request in received_requests %}
+            <li>
+                {{ request.from_user.full_name }} wants to connect with you.
+                <a href="{% url 'accept_connection_request' request.id %}">Accept</a>
+                <a href="#">Decline</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
