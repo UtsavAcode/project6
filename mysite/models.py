@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Signup (models.Model):
     user_name = models.CharField("username",max_length=50)
-    email = models.EmailField("email", max_length=50)
+    email = models.EmailField("email",unique=True)
     phone = models.IntegerField("phone")
     password = models.CharField("password",max_length=20)
     
@@ -15,6 +15,7 @@ class Signup (models.Model):
 class Profile (models.Model):
     image = models.ImageField(default='default_image.jpg',upload_to="image")
     full_name = models.CharField("full_name", max_length=30)
+    signup = models.ForeignKey(Signup, on_delete=models.CASCADE, null=True)
     gender = models.CharField("gender",max_length=50)
     age = models.IntegerField("age")
     phone = models.IntegerField("phone")

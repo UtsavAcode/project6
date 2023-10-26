@@ -17,6 +17,7 @@ class Profile1(forms.Form):
 
     image = forms.ImageField(label="Your Profile Picture")
     full_name = forms.CharField(label="Fullname",max_length=50)
+    email = forms.EmailField(label="email")
     gender = forms.CharField(label="gender",max_length=6)
     age = forms.IntegerField(label="age")
     phone = forms.IntegerField(label="phone")
