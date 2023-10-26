@@ -152,3 +152,5 @@ AUTHENTICATION_BACKENDS = [
     # ...
 ]
 
+LOGIN_URL = 'signin'  # Use the URL name of your login page
+LOGIN_REDIRECT_URL = '/profile1/'

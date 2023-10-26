@@ -9,6 +9,7 @@ class Migration(migrations.Migration):
         ('mysite', '0016_connectionrequest'),
     ]
 
+
     operations = [
         migrations.RenameField(
             model_name='connectionrequest',

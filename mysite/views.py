@@ -7,9 +7,11 @@ from . models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import Register
+from django.core.exceptions import ObjectDoesNotExist
+# from .forms import Register
 # from .forms import Signin
 from .forms import Profile1
+from django.contrib.auth.decorators import login_required
 from django.http import request
 from django.contrib.auth.hashers import make_password,check_password
 from django.db.models import Q
@@ -111,6 +113,7 @@ def register(request):
             
             except Exception as e:
                 pass
+        
 
     return render(request,'forms/register.html')
 
@@ -130,8 +133,9 @@ def signin(request):
 
         try:
             user = Signup.objects.get(email=normalized_email)
+            print("user found",user)
             password_matched = check_password(password,user.password)
-            
+            print("passeord matched",password_matched)
             if password_matched:
                 request.session['email'] = normalized_email
                 # return redirect('/profile1/')
@@ -160,45 +164,61 @@ def signin(request):
 
 
 # User Profile creation 
-def profile1(request):
-    
-    if request.method == "POST":
-        form = Profile1(request.POST, request.FILES)
-        if form.is_valid():
-            profile = Profile (
-                image = request.FILES['image'],
-                full_name = form.cleaned_data['full_name'],
-                gender = form.cleaned_data['gender'],
-                age = form.cleaned_data['age'],
-                phone = form.cleaned_data['phone'],
-                currentL = form.cleaned_data['currentL'],
-                occupation = form.cleaned_data['occupation'],
-                smoking = form.cleaned_data['smoking'],
-                pets = form.cleaned_data['pets'],
-                budget = form.cleaned_data['budget'],
-                social = form.cleaned_data['social'],
-                description = form.cleaned_data['description'],
+@login_required
+def profile1(request):    
+        if request.method == "POST":
+            form = Profile1(request.POST, request.FILES)
+            if form.is_valid():
+                    
+                    user= request.user
+
+                    profile = Profile (
+                    image = request.FILES['image'],
+                    full_name = form.cleaned_data['full_name'],
+                    email= form.cleaned_data['email'],
+                    gender = form.cleaned_data['gender'],
+                    age = form.cleaned_data['age'],
+                    phone = form.cleaned_data['phone'],
+                    currentL = form.cleaned_data['currentL'],
+                    occupation = form.cleaned_data['occupation'],
+                    smoking = form.cleaned_data['smoking'],
+                    pets = form.cleaned_data['pets'],
+                    budget = form.cleaned_data['budget'],
+                    social = form.cleaned_data['social'],
+                    description = form.cleaned_data['description'],
                 
                 
             )
 
             profile.save()
             return HttpResponseRedirect('/dash/')
-    form = Profile1()
+    
+        else:
+            form = Profile1()
+        
+        return render(request, 'forms/profile1.html',{
+       "form":form
+     })
+    
+
+  
     
 
 
-    return render(request, 'forms/profile1.html',{
-       "form":form
-     })
+    
 
 
 
 
 def dash(request):
     objs = Profile.objects.all()
-   
-
+    # if Profile.objects.filter(user=request.user).exists():
+    #     objs = Profile.objects.all()
+    #     return render(request, 'main/dash.html', {"objs": objs})
+    # else:
+    #     # Redirect the user to the profile creation page
+    #     return redirect('profile1')
+    
     return render(request, 'main/dash.html',{"objs":objs})
 
 def user_detail(request):

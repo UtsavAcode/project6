@@ -13,9 +13,10 @@ class Signup (models.Model):
 # Profile
 
 class Profile (models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
     image = models.ImageField(default='default_image.jpg',upload_to="image")
     full_name = models.CharField("full_name", max_length=30)
-    signup = models.ForeignKey(Signup, on_delete=models.CASCADE, null=True)
+    email = models.EmailField("email", max_length=30)
     gender = models.CharField("gender",max_length=50)
     age = models.IntegerField("age")
     phone = models.IntegerField("phone")
