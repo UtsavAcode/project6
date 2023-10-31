@@ -120,6 +120,20 @@ def register(request):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      
 
 
@@ -133,13 +147,14 @@ def signin(request):
 
         try:
             user = Signup.objects.get(email=normalized_email)
-            print("user found",user)
+            
             password_matched = check_password(password,user.password)
-            print("passeord matched",password_matched)
+            
             if password_matched:
                 request.session['email'] = normalized_email
-                # return redirect('/profile1/')
-                # Check if the user already has a profile (assuming a ForeignKey relationship)
+                request.session['user_authenticated'] = True
+
+                
                 if hasattr(user, 'profile'):
                     # If a profile exists, redirect to the dashboard
                     print("Redirecting to dashboard")
@@ -148,6 +163,8 @@ def signin(request):
                     # If no profile exists, redirect to profile creation
                     print("Redirecting to profile")
                     return redirect('/profile1/')
+
+                
                 
             else:
                 messages.error(request,"Incorrect password")
@@ -163,42 +180,86 @@ def signin(request):
 
 
 
-# User Profile creation 
+
+
+# new profile creation 
+
 @login_required
-def profile1(request):    
-        if request.method == "POST":
-            form = Profile1(request.POST, request.FILES)
-            if form.is_valid():
+def profile1(request):
+    if request.method == "POST":
+        form = Profile1(request.POST, request.FILES)
+        if form.is_valid():
+            user = request.user
+
+            profile, created = Profile.objects.get_or_create(user=user)
+
+            if created:
+                # If a new profile is created, save the profile details
+                profile.image = request.FILES['image']
+                profile.full_name = form.cleaned_data['full_name']
+                profile.gender = form.cleaned_data['gender']
+                profile.age = form.cleaned_data['age']
+                profile.phone = form.cleaned_data['phone']
+                profile.currentL = form.cleaned_data['currentL']
+                profile.occupation = form.cleaned_data['occupation']
+                profile.smoking = form.cleaned_data['smoking']
+                profile.pets = form.cleaned_data['pets']
+                profile.budget = form.cleaned_data['budget']
+                profile.social = form.cleaned_data['social']
+                profile.description = form.cleaned_data['description']
+                profile.save()
+            return redirect('/dash/')
+    else:
+        form = Profile1()
+
+    return render(request, 'forms/profile1.html', {
+        "form": form
+    })
+
+
+
+
+
+
+
+
+
+# # User Profile creation 
+# @login_required
+# def profile1(request):    
+#         if request.method == "POST":
+#             form = Profile1(request.POST, request.FILES)
+#             if form.is_valid():
                     
-                    user= request.user
+#                 user= request.user
 
-                    profile = Profile (
-                    image = request.FILES['image'],
-                    full_name = form.cleaned_data['full_name'],
-                    email= form.cleaned_data['email'],
-                    gender = form.cleaned_data['gender'],
-                    age = form.cleaned_data['age'],
-                    phone = form.cleaned_data['phone'],
-                    currentL = form.cleaned_data['currentL'],
-                    occupation = form.cleaned_data['occupation'],
-                    smoking = form.cleaned_data['smoking'],
-                    pets = form.cleaned_data['pets'],
-                    budget = form.cleaned_data['budget'],
-                    social = form.cleaned_data['social'],
-                    description = form.cleaned_data['description'],
+                # profile = Profile (
+                # image = request.FILES['image'],
+                # full_name = form.cleaned_data['full_name'],
+                    
+                # gender = form.cleaned_data['gender'],
+                # age = form.cleaned_data['age'],
+                # phone = form.cleaned_data['phone'],
+                # currentL = form.cleaned_data['currentL'],
+                # occupation = form.cleaned_data['occupation'],
+                # smoking = form.cleaned_data['smoking'],
+                # pets = form.cleaned_data['pets'],
+                # budget = form.cleaned_data['budget'],
+                # social = form.cleaned_data['social'],
+                # description = form.cleaned_data['description'],
                 
                 
-            )
+            # )
 
-            profile.save()
-            return HttpResponseRedirect('/dash/')
+    #         profile.save()
+    #         return HttpResponseRedirect('/dash/')
     
-        else:
-            form = Profile1()
+    #     else:
+    #         form = Profile1()
         
-        return render(request, 'forms/profile1.html',{
-       "form":form
-     })
+    #     return render(request, 'forms/profile1.html',{
+    #    "form":form
+    #  })
     
 
   

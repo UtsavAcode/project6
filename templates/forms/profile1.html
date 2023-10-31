@@ -8,6 +8,8 @@
 {%block title%}
 {%endblock%}
 {%block content%}
+
+{% if request.session.user_authenticated %}
 <form action="{%url 'profile1'%}" method="POST" enctype="multipart/form-data">
        <div class="form-control">
 
@@ -71,5 +73,7 @@
         
 
     </form>
+<!-- {% else %} -->
+{% endif %}
 
 {%endblock%}
