@@ -15,7 +15,7 @@
 <div class="container">
 <div class="form">
 <h1>Sign In</h1>
-<form action="" method="POST">
+<form action="{%url 'signin'%}" method="POST">
     {% csrf_token %}
     <!-- {{ form1 }} -->
     
@@ -36,7 +36,7 @@
     
 
     <button type="submit" class="sign btn bg-warning">Sign In</button>
-    <span class="regis">Not Registered? <a href="{% url 'register'%}">Register</a></span>
+    <span class="regis">Not Registered? <a href="{% url 'mysite:register'%}">Register</a></span>
 </form>
 </div>
 

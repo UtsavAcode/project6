@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Chat History</h1>
+  
+  <div id="chat-history">
+    {% for message in chat_history %}
+      <p><strong>{{ message.sender }}:</strong> {{ message.message }}</p>
+    {% endfor %}
+  </div>
+{% endblock %}

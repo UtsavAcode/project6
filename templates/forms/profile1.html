@@ -9,71 +9,86 @@
 {%endblock%}
 {%block content%}
 
-{% if request.session.user_authenticated %}
+<div class="container">
+<div class="form">    
+     <h1>Create Your Profile:</h1>
 <form action="{%url 'profile1'%}" method="POST" enctype="multipart/form-data">
-       <div class="form-control">
-
-        <h1 class="t">Create Your Profile:</h1>
+           
          {% csrf_token %}
          
         <div class="inp">
-            {{form.image.label_tag}} 
-            {{form.image}}
+            <ion-icon name="image-outline"></ion-icon>
+            <input type="file" name="image" accept="image/*">
+        </div>
+        
+        <div class="inp">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <input type="text" placeholder="Fullname" class="text-center" name="username">
         </div>
 
-       <div class="inp">
-         {{form.full_name.label_tag}}
-        {{form.full_name}}
-       </div>
-        
-       <div class="inp">
-        {{form.email.label_tag}}
-        {{form.email}}
-        
-        {{form.phone.label_tag}}
-        {{form.phone}}
-        
-        {{form.gender.label_tag}}
-        {{form.gender}}
-        
-        {{form.age.label_tag}}
-        {{form.age}}
-            
-        {{form.currentL.label_tag}}
-        {{form.currentL}}
-        
+        <div class="inp">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <input type="email" placeholder="Email" class="text-center" name="email">
+        </div>
 
-        {{form.occupation.label_tag}}
-        {{form.occupation}}
-        
+        <div class="inp">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <input type="text" placeholder="Gender" class="text-center" name="gender">
+        </div>
 
-        {{form.smoking.label_tag}}
-        {{form.smoking}}
-        
+        <div class="inp">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <input type="number" placeholder="Age" class="text-center" name="age">
+        </div>
 
-        {{form.pets.label_tag}}
-        {{form.pets}}
-        
+        <div class="inp">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <input type="number" placeholder="Phone" class="text-center" name="phone">
+        </div>
 
-        {{form.budget.label_tag}}
-        {{form.budget}}
-        
+        <div class="inp">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <input type="text" placeholder="Location" class="text-center" name="currentL">
+        </div>
 
-        {{form.social.label_tag}}
-        {{form.social}}
+        <div class="inp">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <input type="text" placeholder="Occupation" class="text-center" name="occupation">
+        </div>
 
-        {{form.description.label_tag}}
-        {{form.description}}
+        <div class="inp">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <input type="text" placeholder="Do you smoke?" class="text-center" name="smoking">
+        </div>
 
-        <button type="submit">click</button>
-        
+        <div class="inp">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <input type="text" placeholder="Do you have pets?" class="text-center" name="pets">
+        </div>
+
+        <div class="inp">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <input type="text" placeholder="Budget" class="text-center" name="budget">
+        </div>
+
+        <div class="inp">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <input type="text" placeholder="Social Media" class="text-center" name="social">
+        </div>
+
+        <div class="desc">
+            <textarea placeholder="About you" name="description"></textarea>
+        </div>
+
+        <button type="submit" class="sign btn bg-warning">Create</button>
        </div>
 
        </div>
         
 
     </form>
-<!-- {% else %} -->
-{% endif %}
+</div>
+</div>
+
 
 {%endblock%}

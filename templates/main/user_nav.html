@@ -11,9 +11,9 @@
 <header>
   <input type="checkbox" name="" id="chk1">
   
-  <div class="logo"><h1><a class="navbar-brand text-white" href="{%url 'index'%}"><span class="text-warning">Roommate</span>Finder</a></h1></div>
+  <div class="logo"><h1><a class="navbar-brand text-white" href="{%url 'mysite:index'%}"><span class="text-warning">Roommate</span>Finder</a></h1></div>
   <div class="search-box">
-    <form action="{%url 'search'%}" method="get">
+    <form action="{%url 'mysite:search'%}" method="get">
         
       <input type="text" name="search" id="srch" placeholder="Search">
       <button type="submit">
@@ -25,10 +25,11 @@
   </div>
 
   <ul>
-    <li><a href="{%url 'dash'%}">Home</a></li>
-    <li><a href="{%url 'find_roomates'%}">Matches <span id="matchesCount">{{num_matches}}</span></a></li>
+    <li><a href="{%url 'mysite:dash'%}">Home</a></li>
+    <li><a href="{%url 'mysite:profile1'%}">Profile</a></li>
+    <li><a href="{%url 'mysite:find_roomates'%}">Matches <span id="matchesCount">{{num_matches}}</span></a></li>
     <li><a href="#"><i class="bi bi-bell" id="openNotificationSlider"></i></a></li>
-    <li><a href="#"><i class="bi bi-chat-dots-fill"></i></a></li>
+    <li><a href="{% url 'mysite:create_chat' to_user_id=user_id %}"><i class="bi bi-chat-dots-fill"></i></a></li>
    
   
   </ul>

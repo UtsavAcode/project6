@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 # from .forms import Register
 # from .forms import Signin
-from .forms import Profile1
+# from .forms import Profile1
 from django.contrib.auth.decorators import login_required
 from django.http import request
 from django.contrib.auth.hashers import make_password,check_password
@@ -23,6 +23,22 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from .models import ConnectionRequest
+
+# all for the chatting section
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
+from .models import ChatMessage
+
+
+
+
+
+
+
+
+
+
+
 
 def index(request):
     return render(request,'index.html')
@@ -83,7 +99,7 @@ def admin_login(request):
 
 def register(request):
     if request.method == 'POST':
-        name= request.POST.get('user_name')
+        username= request.POST.get('username')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         password = request.POST.get('password')
@@ -104,7 +120,7 @@ def register(request):
             return redirect(request,'/register/')
         
         else:
-            user = Signup(user_name = name, email = normalized_email, phone = phone, password = hashed_password) 
+            user = Signup(username = username, email = normalized_email, phone = phone, password = hashed_password) 
 
             try:
                 user.save()
@@ -140,81 +156,31 @@ def register(request):
 # this is the area of login 
 
 def signin(request):
-    if request.method == 'POST':    
+    if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
         normalized_email = email.lower()
-
         try:
-            user = Signup.objects.get(email=normalized_email)
-            
+            user = Signup.objects.get(email = normalized_email)
             password_matched = check_password(password,user.password)
             
             if password_matched:
                 request.session['email'] = normalized_email
-                request.session['user_authenticated'] = True
-
-                
-                if hasattr(user, 'profile'):
-                    # If a profile exists, redirect to the dashboard
-                    print("Redirecting to dashboard")
-                    return redirect('/dash/')
-                else:
-                    # If no profile exists, redirect to profile creation
-                    print("Redirecting to profile")
-                    return redirect('/profile1/')
-
-                
-                
+                return redirect('/dash/')
             else:
-                messages.error(request,"Incorrect password")
+                messages.error(request,"Incorrect Password")
                 return redirect('/signin/')
             
         except Signup.DoesNotExist as e:
             print(e)
-            messages.error(request,"Account doesnot exist")
-            return redirect('/signin/')
-        
-   
+            messages.error(request,"Account doesnot exists.")
+            return redirect('/register/')
     return render(request,'forms/signin.html')
-
-
 
 
 
 # new profile creation 
 
-@login_required
-def profile1(request):
-    if request.method == "POST":
-        form = Profile1(request.POST, request.FILES)
-        if form.is_valid():
-            user = request.user
-
-            profile, created = Profile.objects.get_or_create(user=user)
-
-            if created:
-                # If a new profile is created, save the profile details
-                profile.image = request.FILES['image']
-                profile.full_name = form.cleaned_data['full_name']
-                profile.gender = form.cleaned_data['gender']
-                profile.age = form.cleaned_data['age']
-                profile.phone = form.cleaned_data['phone']
-                profile.currentL = form.cleaned_data['currentL']
-                profile.occupation = form.cleaned_data['occupation']
-                profile.smoking = form.cleaned_data['smoking']
-                profile.pets = form.cleaned_data['pets']
-                profile.budget = form.cleaned_data['budget']
-                profile.social = form.cleaned_data['social']
-                profile.description = form.cleaned_data['description']
-                profile.save()
-            return redirect('/dash/')
-    else:
-        form = Profile1()
-
-    return render(request, 'forms/profile1.html', {
-        "form": form
-    })
 
 
 
@@ -223,43 +189,97 @@ def profile1(request):
 
 
 
+# User Profile creation 
+def profile1(request):  
+    if request.method == 'POST':
+        # Retrieve form data from the request
+        image = request.FILES['image']
+        username = request.POST['username']
+        email = request.POST['email']
+        gender = request.POST['gender']
+        age = request.POST['age']
+        phone = request.POST['phone']
+        currentL = request.POST['currentL']
+        occupation = request.POST['occupation']
+        smoking = request.POST['smoking']
+        pets = request.POST['pets']
+        budget = request.POST['budget']
+        social = request.POST['social']
+        description = request.POST['description']
 
-# # User Profile creation 
-# @login_required
-# def profile1(request):    
-#         if request.method == "POST":
-#             form = Profile1(request.POST, request.FILES)
-#             if form.is_valid():
-                    
-#                 user= request.user
+        # Create a new Profile instance with the form data
+        profile = Profile(
+            image=image,
+            username=username,
+            email=email,
+            gender=gender,
+            age=age,
+            phone=phone,
+            currentL=currentL,
+            occupation=occupation,
+            smoking=smoking,
+            pets=pets,
+            budget=budget,
+            social=social,
+            description=description
+        )
 
-                # profile = Profile (
-                # image = request.FILES['image'],
-                # full_name = form.cleaned_data['full_name'],
-                    
-                # gender = form.cleaned_data['gender'],
-                # age = form.cleaned_data['age'],
-                # phone = form.cleaned_data['phone'],
-                # currentL = form.cleaned_data['currentL'],
-                # occupation = form.cleaned_data['occupation'],
-                # smoking = form.cleaned_data['smoking'],
-                # pets = form.cleaned_data['pets'],
-                # budget = form.cleaned_data['budget'],
-                # social = form.cleaned_data['social'],
-                # description = form.cleaned_data['description'],
-                
-                
-            # )
+        # Save the Profile instance to the database
+        profile.save()
 
-    #         profile.save()
-    #         return HttpResponseRedirect('/dash/')
-    
-    #     else:
-    #         form = Profile1()
+        # Redirect to a success page or wherever you'd like
+        return redirect('/dash/')
+
+    return render(request, 'forms/profile1.html')  
         
-    #     return render(request, 'forms/profile1.html',{
-    #    "form":form
-    #  })
+
+
+        # email = request.session.get('email',None)
+        # if email:
+        #     user = Signup.objects.get(email = email)
+
+        #     if request.method =='POST':
+        #         if 'image' in request.FILES:
+        #             if user.user_profile:
+        #                 default_storage.delete(user.user_profile.path)
+                    
+        #             image =  request.FILES['image']
+        #             user.user_profile.save(image.name,image)
+
+        #             username = request.POST.get('username')
+        #             email = request.POST.get('email')
+        #             gender = request.POST.get('gender')
+        #             age = request.POST.get('age')
+        #             phone = request.POST.get('phone')
+        #             location = request.POST.get('location')
+        #             occupation = request.POST.get('occupation')
+        #             social = request.POST.get('social')
+        #             budget = request.POST.get('budget')
+        #             pets =  request.POST.get('pets')
+        #             smoking =  request.POST.get('smoking')
+        #             description = request.POST.get('description')
+
+        #             normalized_email = email.lower()
+
+        #             user.username = username
+        #             user.email =  email
+        #             user.phone = phone
+                    
+        #             try:
+        #                 user.save()
+        #                 messages.info(request,"Profile successfully updated.")
+        #             except Exception as e:
+        #                 print("Exception")
+
+        #             data = user
+        #             return render(request, 'forms/profile1.html',{'data':data})
+        #     else:
+        #         messages.error(request,"Sessio Expired. Please login again.")
+        #         return redirect('/login/')
+
+
+        
+        
     
 
   
@@ -271,16 +291,16 @@ def profile1(request):
 
 
 
+@login_required
 def dash(request):
+    user_id = request.user.id
     objs = Profile.objects.all()
-    # if Profile.objects.filter(user=request.user).exists():
-    #     objs = Profile.objects.all()
-    #     return render(request, 'main/dash.html', {"objs": objs})
-    # else:
-    #     # Redirect the user to the profile creation page
-    #     return redirect('profile1')
-    
-    return render(request, 'main/dash.html',{"objs":objs})
+    return render(request, 'main/dash.html', {"objs": objs, 'user_id': user_id})
+
+
+
+
+
 
 def user_detail(request):
     objs = Profile.objects.all()
@@ -368,6 +388,8 @@ def update(request):
 def update_profile(request):
     return render(request, 'forms/profile1.html')
 
+
+
 def search(request):
     
     query = request.GET.get('search','')
@@ -376,12 +398,17 @@ def search(request):
 
     if query:
         profiles = profiles.filter(
-            Q(full_name__icontains=query) | Q(currentL__icontains=query) | Q(age__icontains=query) | Q(budget__icontains=query) | Q(occupation__icontains=query) | Q(gender__icontains=query))
+            Q(username__icontains=query) | Q(currentL__icontains=query) | Q(age__icontains=query) | Q(budget__icontains=query) | Q(occupation__icontains=query) | Q(gender__icontains=query))
         
     if not profiles:
-        return redirect('/dash/')
+        # return redirect('/dash/')
+         message = "No results found."
+    
+    num_matches = len(profiles)
 
     return render(request, 'main/search.html',{'profiles':profiles, 'query':query})
+
+
 
 
 
@@ -397,5 +424,51 @@ def delete_row(request, row_id):
 
 
 
-# views.py
+# the chatting section
 
+
+
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
+from .models import Chat, ChatMessage
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+from django.db.models import Q
+
+@login_required
+def create_chat(request, to_user_id):
+    from_user = request.user
+    to_user = get_object_or_404(User, id=to_user_id)
+
+    # Check if a chat between these two users already exists
+    chat = Chat.objects.filter(Q(users=from_user) & Q(users=to_user))
+
+    if chat.exists():
+        chat = chat[0]
+    else:
+        # Create a new chat conversation
+        chat = Chat.objects.create()
+        chat.users.add(from_user, to_user)
+
+    return JsonResponse({"chat_id": chat.id})
+
+@login_required
+@require_POST
+def send_message(request, chat_id):
+    chat = get_object_or_404(Chat, id=chat_id)
+    sender = request.user.profile
+    content = request.POST.get("content")
+
+    if content:
+        message = ChatMessage(sender=sender, receiver=chat.users.exclude(id=sender.id).first(), message=content)
+        message.save()
+
+    return JsonResponse({"message_id": message.id})
+
+@login_required
+def get_chat_history(request, chat_id):
+    chat = get_object_or_404(Chat, id=chat_id)
+    messages = chat.chatmessage_set.all()
+    chat_history = [{"sender": message.sender.username, "message": message.message, "timestamp": message.timestamp} for message in messages]
+
+    return JsonResponse({"chat_history": chat_history})

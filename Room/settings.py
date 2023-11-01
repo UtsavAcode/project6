@@ -152,5 +152,4 @@ AUTHENTICATION_BACKENDS = [
     # ...
 ]
 
-# LOGIN_URL = 'signin'  # Use the URL name of your login page
-LOGIN_REDIRECT_URL = 'dash'
+LOGIN_URL = 'signin'  # Assuming 'login' is the URL name for your login page

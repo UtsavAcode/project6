@@ -1,6 +1,6 @@
 a<nav class=" p-3 navbar navbar-expand-lg bg-light fixed-top ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{%url 'index'%}"><span class="text-warning">Roommate</span>Finder</a>
+    <a class="navbar-brand" href="{%url 'mysite:index'%}"><span class="text-warning">Roommate</span>Finder</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,13 +23,13 @@ a<nav class=" p-3 navbar navbar-expand-lg bg-light fixed-top ">
         </li>
 
         <li class="nav-item">
-          <a href="{% url 'signin'%}">
+          <a href="{% url 'mysite:signin'%}">
           <button class=" ms-4 btn btn-outline-success " type="submit">Login</button>
           </a>
           
         </li> 
         <li class="nav-item">
-          <a href="{% url 'register'%}">
+          <a href="{% url 'mysite:register'%}">
            <button class="ms-2 btn btn-outline-success" type="submit">Signup</button>
           </a>
           </li>
