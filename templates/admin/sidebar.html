@@ -49,20 +49,29 @@
   </div>
   </li>
 
-  
-    <a href="{% url 'register_table'%}" class="nav-link px-3 active">
+  <li>
+    <a href="{% url 'mysite:register_table'%}" class="nav-link px-3 active">
        <span class="me-2">
        <i class="bi bi-people-fill text-white"></i>
       </span>
       <span class="text-white">User Table</span>
     </a>
   </li>
-
-     <a href="" class="nav-link px-3 active">
+    <li>
+     <a href="{%url 'mysite:profile_view'%}" class="nav-link px-3 active">
        <span class="me-2">
        <i class="bi bi-person-circle text-white"></i>
       </span>
       <span class="text-white">User Profiles</span>
+    </a>
+  </li>
+
+  <li>
+     <a href="{%url 'mysite:generate_report'%}" class="nav-link px-3 active">
+       <span class="me-2">
+       <i class="bi bi-bar-chart-fill text-white"></i>
+      </span>
+      <span class="text-white">Report</span>
     </a>
   </li>
 
@@ -108,67 +117,13 @@
 </div>
 </div>
 
-<div class="col-md-3 mb-3">
-  <div class="card">
-    <div class="card text-bg-primary h-100" >
-      <div class="card-header">Header</div>
-        <div class="card-body">
-          <h5 class="card-title">Primary card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-</div>
 
-<div class="col-md-3 mb-3">
-  <div class="card">
-    <div class="card text-bg-primary h-100">
-      <div class="card-header">Header</div>
-        <div class="card-body">
-          <h5 class="card-title">Primary card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-</div>
 
-<div class="col-md-3 mb-3">
-  <div class="card">
-    <div class="card text-bg-primary h-100">
-      <div class="card-header">Header</div>
-        <div class="card-body">
-          <h5 class="card-title">Primary card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-         </div>
-        </div>
-      </div>
-    </div>
+
 
   </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          Charts
-        </div>
-        <div class="card-body">
-          <canvas class="chart" width="400" height="200"></canvas>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          Charts
-        </div>
-        <div class="card-body">
-          <canvas class="chart" width="400" height="200"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </div>
 </div>

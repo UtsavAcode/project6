@@ -39,7 +39,7 @@
                       {% for obj in objs %}
                       <tr data-row-id="{{ obj.id }}">
                         <td>{{obj.id}}</td>
-                        <td>{{obj.user_name}}</td>
+                        <td>{{obj.username}}</td>
                         <td>{{obj.email }}</td>
                         <td>{{obj.phone}}</td>
                         
@@ -54,7 +54,7 @@
 
                             <!-- Update zone -->
                             <span class="btn btn-primary text-light text-center">
-                               <a href="{%url 'update'%}?email={{ obj.email }}" class="text-light text-decoration-none" data-id="{{obj.id}}">
+                               <a href="{%url 'mysite:update'%}?email={{ obj.email }}" class="text-light text-decoration-none" data-id="{{obj.id}}">
                                 Edit
                                </a>
                             </span>

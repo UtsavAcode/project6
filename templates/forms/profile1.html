@@ -3,6 +3,8 @@
 
 {%block css%}
 <link rel="stylesheet" href="{% static 'css/profile.css'%}">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+
 {%endblock%}
 
 {%block title%}
@@ -12,73 +14,85 @@
 <div class="container">
 <div class="form">    
      <h1>Create Your Profile:</h1>
-<form action="{%url 'profile1'%}" method="POST" enctype="multipart/form-data">
+<form action="{%url 'mysite:profile1'%}" method="POST" enctype="multipart/form-data">
            
          {% csrf_token %}
          
         <div class="inp">
             <ion-icon name="image-outline"></ion-icon>
-            <input type="file" name="image" accept="image/*">
+            <input type="file" name="image" accept="image/*" value="{{user.image.url }}">
         </div>
         
         <div class="inp">
             <ion-icon name="person-circle-outline"></ion-icon>
-            <input type="text" placeholder="Fullname" class="text-center" name="username">
+            <input type="text" placeholder="Fullname" class="text-center" name="username" value="{{ user.username }}">
         </div>
 
         <div class="inp">
             <ion-icon name="person-circle-outline"></ion-icon>
-            <input type="email" placeholder="Email" class="text-center" name="email">
+            <input type="email" placeholder="Email" class="text-center" name="email"value="{{ user.email }}">
         </div>
 
         <div class="inp">
             <ion-icon name="person-circle-outline"></ion-icon>
-            <input type="text" placeholder="Gender" class="text-center" name="gender">
+            <input type="text" placeholder="Gender" class="text-center" name="gender" value="{{ user.gender }}">
         </div>
 
         <div class="inp">
             <ion-icon name="person-circle-outline"></ion-icon>
-            <input type="number" placeholder="Age" class="text-center" name="age">
+            <input type="number" placeholder="Age" class="text-center" name="age" value="{{ user.age }}">
         </div>
 
         <div class="inp">
             <ion-icon name="person-circle-outline"></ion-icon>
-            <input type="number" placeholder="Phone" class="text-center" name="phone">
+            <input type="number" placeholder="Phone" class="text-center" name="phone" value="{{ user.phone }}">
         </div>
 
         <div class="inp">
             <ion-icon name="person-circle-outline"></ion-icon>
-            <input type="text" placeholder="Location" class="text-center" name="currentL">
+            <input type="text" placeholder="Name of the place you are living currently. " class="text-center" name="currentL" value="{{ profile_data.currentL }}">
+        </div>
+        
+            <!-- Add a button to trigger location retrieval -->
+            <!-- <button type="button" id="getLocationButton">Get My Location</button> -->
+
+            <!-- Map container -->
+            
+
+        <div class="inp">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <input type="text" placeholder="Occupation" class="text-center" name="occupation" value="{{ profile_data.occupation }}">
         </div>
 
         <div class="inp">
             <ion-icon name="person-circle-outline"></ion-icon>
-            <input type="text" placeholder="Occupation" class="text-center" name="occupation">
+            <input type="text" placeholder="Do you smoke?" class="text-center" name="smoking" value="{{ profile_data.smoking }}">
         </div>
 
         <div class="inp">
             <ion-icon name="person-circle-outline"></ion-icon>
-            <input type="text" placeholder="Do you smoke?" class="text-center" name="smoking">
+            <input type="text" placeholder="Do you have pets?" class="text-center" name="pets" value="{{ profile_data.pets }}">
         </div>
 
         <div class="inp">
             <ion-icon name="person-circle-outline"></ion-icon>
-            <input type="text" placeholder="Do you have pets?" class="text-center" name="pets">
+            <input type="text" placeholder="Budget" class="text-center" name="budget" value="{{ profile_data.budget }}">
         </div>
 
         <div class="inp">
             <ion-icon name="person-circle-outline"></ion-icon>
-            <input type="text" placeholder="Budget" class="text-center" name="budget">
-        </div>
-
-        <div class="inp">
-            <ion-icon name="person-circle-outline"></ion-icon>
-            <input type="text" placeholder="Social Media" class="text-center" name="social">
+            <input type="text" placeholder="Social Media" class="text-center" name="social" value="{{ profile_data.social }}">
         </div>
 
         <div class="desc">
-            <textarea placeholder="About you" name="description"></textarea>
+            <textarea placeholder="About you" name="description" value="{{ profile_data.description }}"></textarea>
         </div>
+
+        <label for="map" class="mp">Locate yourself.</label>
+        <div id="map" style="height: 400px;"></div>
+            <input type="hidden" id="latitude" name="latitude" value="{{ profile_data.latitude }}">
+            <input type="hidden" id="longitude" name="longitude" value="{{ profile_data.longitude }}">
+
 
         <button type="submit" class="sign btn bg-warning">Create</button>
        </div>
@@ -91,4 +105,11 @@
 </div>
 
 
+{%endblock%}
+
+{%block javascript%}
+<!-- Load Leaflet from a CDN -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<script src="{% static './js/map.js' %}"></script>
 {%endblock%}

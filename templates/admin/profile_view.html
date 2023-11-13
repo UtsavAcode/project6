@@ -1,0 +1,149 @@
+{% include '../base/base.html' %}
+{%load static%}
+
+
+{%block css%}
+<link rel="stylesheet" href="{%static 'css/dash.css'%}">
+<link rel="stylesheet" href="{%static 'css/user_nav.css'%}">
+{%endblock%}
+
+ {% block navbar %}
+  <!-- {% include 'main/user_nav.html' %} -->
+
+  
+<header>
+  <input type="checkbox" name="" id="chk1">
+  
+  <div class="logo"><h1><a class="navbar-brand text-white" href="{%url 'mysite:index'%}"><span class="text-warning">Roommate</span>Finder</a></h1></div>
+  <div class="search-box">
+    <form action="{%url 'mysite:search'%}" method="get">
+        
+      <input type="text" name="search" id="srch" placeholder="Search">
+      <button type="submit">
+        <span class="ss">
+          <i class="bi bi-search text-black"></i>
+        </span>
+      </button>
+    </form>
+  </div>
+
+  <ul>
+    <li><a href="{%url 'mysite:padmin'%}">Home</a></li>
+    
+   
+  
+  </ul>
+
+  <div class="menu">
+    <label for="chk1">
+      <i class="bi bi-ui-checks-grid"></i>
+    </label>
+  </div>
+</header>
+
+
+ {% endblock navbar %}
+
+{%block content%}
+
+<h1>Welcome</h1>
+    {%for obj in objs%}
+        <div class="container">
+            <div class="box">
+                <div class="heading">
+                    <h2>{{obj.username}}</h2>
+                    <h4>Age: {{obj.age}}</h4>
+                    <h4>Budget: {{obj.budget}}</h4>
+                    <h4>smoking: {{obj.smoking}}</h4>
+                    <h4>Pets: {{obj.pets}}</h4>
+                     <h4>Gender: {{obj.gender}}</h4>
+                     
+                </div>
+
+                <img src="{{obj.image.url}}" alt="" height="200" width="200">
+                
+                <div class="text">                    
+                    <a href="" class="read-more" id="readMoreLink">Readmore</a>
+                </div>
+
+
+                        <div class="text" id="delete">
+                            <form method="post" action="{% url 'mysite:delete_profile' obj.id %}">
+                             {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                        </div>
+    
+                <!-- slider Area -->
+               <div class="slider-overlay"></div>
+                <div class="slider">
+                    <div class="slider-content">
+                        <span class="close">
+                            <a href="" class="close-slider text-decoration-none" id="closeSliderLink">
+                                <i class="bi bi-x-lg text-black m-auto"></i>
+                            </a>
+                        </span>                           
+
+                            <div class="card" style="width: 100%;">                                    
+                                        <div class="image-container">
+                                            <img src="{{obj.image.url}}" class="card-img-top" alt="" height="200" width="200">
+                                        </div>
+
+                                   
+                                        <div class="card-body">
+                                            <h5 class="card-title fs-1 fw-bold">{{obj.username}}</h5>
+                                            <p class="card-text">
+                                            <div class="details">
+                                                
+                                                <div class="left">
+                                                    <p><span class="fw-bold fs-5">Age:</span> {{obj.age}}</p>
+                                                    <p><span class="fw-bold fs-5">Budget:</span> {{obj.budget}}</p>
+                                                    <p><span class="fw-bold fs-5">Smoking:</span> {{obj.smoking}}</p>
+                                                    <p><span class="fw-bold fs-5">Gender:</span> {{obj.gender}}</p>
+                                                    
+                                                </div>
+                                                <div class="right">
+                                                    <p><span class="fw-bold fs-5">Phone no:</span> {{obj.phone}}</p>
+                                                    <p><span class="fw-bold fs-5">Occupation:</span> {{obj.occupation}}</p>                                                    
+                                                    <p><span class="fw-bold fs-5">Pets:</span> {{obj.pets}}</p>
+                                                    <p><span class="fw-bold fs-5">Budget:</span> {{obj.budget}}</p>
+                                                </div>                                                   
+                                            </div>
+                                                <div class="info">
+                                                    <div class="social"><p><span class="fw-bold fs-5">Social media:</span> <br>{{obj.social}}</p></div>
+                                                    <div class="about">{{obj.description}}</div>
+                                                </div>
+                                             </p>
+                                                 <div class="connect">
+                                                    <a href="#" class="btn btn-warning">message</a>
+                                                 </div>
+
+                                                 
+<!-- The following is the message dialog, initially hidden -->
+                                      
+                             </div>
+                                    </div>
+                                 </div>
+                            </div>
+                </div>
+
+
+                <!--Slider end  -->
+
+                    
+                
+            </div>
+        </div>
+        
+    {%endfor%}
+
+</div>
+
+{%endblock%}
+
+{%block javascript%}
+<script src=" {% static './js/dash.js' %} "></script>
+<script src=" {% static './js/slider.js' %} "></script>
+<script src=" {% static './js/user_nav.js' %} "></script>
+<script src=" {% static './js/connect.js' %} "></script>
+{%endblock%}

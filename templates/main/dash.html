@@ -12,6 +12,8 @@
 
 {%block content%}
 
+
+
 <h1>Welcome</h1>
     {%for obj in objs%}
         <div class="container">
@@ -23,7 +25,7 @@
                     <h4>smoking: {{obj.smoking}}</h4>
                     <h4>Pets: {{obj.pets}}</h4>
                      <h4>Gender: {{obj.gender}}</h4>
-                     <h4>Location: {{obj.currentL}}</h4>
+                     
                 </div>
 
                 <img src="{{obj.image.url}}" alt="" height="200" width="200">
@@ -58,7 +60,7 @@
                                                     <p><span class="fw-bold fs-5">Budget:</span> {{obj.budget}}</p>
                                                     <p><span class="fw-bold fs-5">Smoking:</span> {{obj.smoking}}</p>
                                                     <p><span class="fw-bold fs-5">Gender:</span> {{obj.gender}}</p>
-                                                    <p><span class="fw-bold fs-5">Location:</span> {{obj.currentL}}</p>
+                                                    
                                                 </div>
                                                 <div class="right">
                                                     <p><span class="fw-bold fs-5">Phone no:</span> {{obj.phone}}</p>
@@ -73,13 +75,24 @@
                                                 </div>
                                              </p>
                                                  <div class="connect">
-                                                    <a href="#" class="btn btn-warning">Message</a>
+                                                    <form action="{% url 'mysite:sendemail' %}" method="post">
+                                                        {% csrf_token %}
+                                                        <input type="text" name="name" id="name" value="{{obj.username}}">
+                                                        <input type="text" name="email" id="email" value="{{obj.email}}">
+                                                        <input type="submit" class="btn btn-primary" value="Connect">
+                                                    </form>
                                                  </div>
-                                        </div>
+
+                                                 
+<!-- The following is the message dialog, initially hidden -->
+                                      
+                             </div>
                                     </div>
                                  </div>
                             </div>
                 </div>
+
+
                 <!--Slider end  -->
 
                     
@@ -98,4 +111,6 @@
 <script src=" {% static './js/slider.js' %} "></script>
 <script src=" {% static './js/user_nav.js' %} "></script>
 <script src=" {% static './js/connect.js' %} "></script>
+<script src=" {% static './js/message.js' %} "></script>
+<script src=" {% static './js/notification.js' %} "></script>
 {%endblock%}

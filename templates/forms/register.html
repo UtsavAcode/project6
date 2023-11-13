@@ -1,46 +1,39 @@
 {% include '../base/base.html' %}
-{%load static%}
+{% load static %}
 
-{%block css%}
+{% block css %}
 <link rel="stylesheet" href="{% static 'css/signin.css' %}">
-{%endblock%}
+{% endblock %}
 
-{%block title%}
-{%endblock%}
+{% block title %}
+{% endblock %}
 
-
-{%block content%}
-
+{% block content %}
 <div class="container">
-<div class="form">
-<h1>Register</h1>
- <form action="{% url 'register' %}" method="POST">
-    {% csrf_token %}
     
-    <div class="inp">
-        <ion-icon name="person-circle-outline"></ion-icon>
-        <input type="text" placeholder="Username" class="text-center" name="username">
+    <div class="form">
+        <h1>Register</h1>
+        <form action="{% url 'mysite:register' %}" method="POST">
+            {% csrf_token %}
+            <div class="inp">
+                <ion-icon name="person-circle-outline"></ion-icon>
+                <input type="text" placeholder="Username" class="text-center" name="username">
+            </div>
+            <div class="inp">
+                <ion-icon name="mail-outline"></ion-icon>
+                <input type="email" placeholder="Email" class="text-center" name="email">
+            </div>
+            <div class="inp">
+                <ion-icon name="call-outline"></ion-icon>
+                <input type="number" placeholder="Phone" class="text-center" name="phone">
+            </div>
+            <div class="inp">
+                <ion-icon name="key-outline"></ion-icon>
+                <input type="password" placeholder="Password" class="text-center" name="password">
+            </div>
+            <button type="submit" class="sign btn bg-warning">Sign Up</button>
+            <span class="regis">Already have an account? <a href="{% url 'mysite:signin' %}">Sign in</a></span>
+        </form>
     </div>
-
-    <div class="inp">
-        <ion-icon name="person-circle-outline"></ion-icon>
-        <input type="email" placeholder="Email" class="text-center" name="email">
-    </div>
-    
-    <div class="inp">
-        <ion-icon name="person-circle-outline"></ion-icon>
-        <input type="number" placeholder="Phone" class="text-center" name="phone">
-    </div>
-    
-    <div class="inp">
-        <ion-icon name="person-circle-outline"></ion-icon>
-        <input type="password" placeholder="Password" class="text-center" name="password">
-    </div>
-
-<button type="submit" class="sign btn bg-warning">Sign Up</button>
-<span class="regis">Already have an account ? <a href="{%url 'mysite:signin'%}">Sign in</a></span>
-
-</form>
-
-
-{%endblock%}
+</div>
+{% endblock %}

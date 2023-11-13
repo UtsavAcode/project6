@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 2px;
+            text-align: center;
+        }
+    </style>
+    <title>Report for this month</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Total Number of users this month.</h1>
+        <table>
+            <tr>
+
+                <th>SN</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Phone</th>
+            </tr>
+            {% for item in data%}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{item.username}}</td>
+                <td>{{item.email}}</td>
+                {% if item.currentL%}
+                <td>{{item.currentL}}</td>
+                {%else%}
+                <td>N/A</td>
+                {%endif%}
+                <td>{{item.phone}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+</body>
+</html>

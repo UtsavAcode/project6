@@ -15,8 +15,11 @@
 {%block content%}
     <h1 class="heading">Matching Roommates: </h1>
     <br><br><br>
-    <h1 class="heading2"> These are the people that have a match with you </h1>
-{%for user in matching_users%}
+
+ <h1 class="heading2"> These are the people that have a match with you </h1>
+
+
+ {%for user in matching_users%}
             
 
     <div class="container">
@@ -28,7 +31,7 @@
                     <h4>smoking: {{user.smoking}}</h4>
                     <h4>Pets: {{user.pets}}</h4>
                      <h4>Gender: {{user.gender}}</h4>
-                     <h4>Location: {{user.currentL}}</h4>
+                     
                 </div>
 
             <img src="{{user.image.url}}" alt="" height="200" width="200">
@@ -67,7 +70,7 @@
                                                     <p><span class="fw-bold fs-5">Budget:</span> {{user.budget}}</p>
                                                     <p><span class="fw-bold fs-5">Smoking:</span> {{user.smoking}}</p>
                                                     <p><span class="fw-bold fs-5">Gender:</span> {{user.gender}}</p>
-                                                    <p><span class="fw-bold fs-5">Location:</span> {{user.currentL}}</p>
+                                                    
                                                 </div>
                                                 <div class="right">
                                                     <p><span class="fw-bold fs-5">Phone no:</span> {{user.phone}}</p>
@@ -91,6 +94,7 @@
                 </div>
                 </div>
             </div>
+
              {%empty%}
             <li>No matching roommates found.</li>
 {%endfor%}

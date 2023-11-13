@@ -34,3 +34,5 @@ closeSliderLinks.forEach(function (closeLink, index) {
     });
 });
 
+
+

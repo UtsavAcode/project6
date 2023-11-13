@@ -1,19 +1,22 @@
-{% include '../base/base.html' %}
-{%load static%}
-
+{% extends 'base/base.html' %}
 
 {% block content %}
-  <h1>Chat with {{ chat.users.exclude(id=request.user.id).first.username }}</h1>
+  <h1>Chat Conversation</h1>
   
-  <div id="chat-history">
-    {% for message in chat_history %}
-      <p><strong>{{ message.sender }}:</strong> {{ message.message }}</p>
+  <div class="chat-container">
+    {% for message in messages %}
+      <div class="message">
+        <strong>{{ message.sender.username }}</strong>: {{ message.message }}
+      </div>
     {% endfor %}
   </div>
 
-  <form id="chat-form" method="post" action="{% url 'mysite:send_message' chat.id %}">
+  <form method="post" action="{% url 'send_message' chat.id %}">
     {% csrf_token %}
-    <input type="text" name="content" placeholder="Type your message here" required>
+    <input type="text" name="content" placeholder="Type your message..." />
     <button type="submit">Send</button>
   </form>
+</div>
+
+
 {% endblock %}

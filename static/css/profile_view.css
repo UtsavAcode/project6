@@ -1,0 +1,180 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+.container{
+    width: 100%;
+    
+       
+}
+
+.heading2{
+    margin-left: 300px;
+}
+
+
+.box{
+    max-width: 350px;
+    padding: 10px;
+    /* border: 3px solid chocolate; */
+    /* margin: 10px auto; */
+    box-shadow: 5px 5px 10px #888888;
+    margin-top: 5rem;
+}
+
+.box img{
+    max-width: 300px;
+    height: 300px;
+    display: block;
+    object-fit: cover;
+    padding: 5px;
+}
+
+.box .heading,
+.box .text{
+    width: 100%;
+    padding: 0 2px;
+    min-width: 300px;
+}
+
+
+h2 h4{
+    text-transform: uppercase;
+}
+
+p{
+    margin: 10px 0;
+}
+
+
+.text a{
+    display: inline-block;
+    background: rgb(13, 12, 12);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+
+
+.navbar,.container-fluid{
+    background-color: rgb(168, 163, 163);
+}
+
+/* .container-fluid{
+    height: 100%;
+} */
+
+/* slider */
+
+.slider{
+    position:fixed;
+    top: 0;
+    right: -50%;
+    width: 50%;
+    height: 100%;
+    background-color: #fff;
+    overflow-y: scroll;
+    transition: right 0.3s;
+    z-index: 999;
+    box-shadow: 5px 5px 10px #888888;
+}
+
+.slider-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: none;
+    z-index: 998;
+}
+
+.slider-content{
+    padding:20px;
+}
+
+.close .close-slider{
+    left: 0;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.image-container img{
+     border-radius: 50%;
+}
+
+.details{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.card-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+
+.social{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.connect{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+@media (min-width: 700px){
+    .container{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .box{
+        max-width: 700px;
+    }
+
+    .box img {
+        float: left;
+    }
+
+    .box .heading,
+    .box .text{
+        float:right;
+        width: 50%;
+    }
+}
+
+

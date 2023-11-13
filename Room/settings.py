@@ -120,9 +120,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
-# STATIC_ROOT='/static'
-# MEDIA_URL = '/media/'
+STATIC_URL = 'static/'
+STATIC_BASE = '/static/'
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')\
 
@@ -153,3 +152,11 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 LOGIN_URL = 'signin'  # Assuming 'login' is the URL name for your login page
+
+# settings.py
+
+EMAIL_HOST = 'smtp.gmail.com'  # Example: 'smtp.gmail.com'
+EMAIL_PORT = 587 # Example for TLS: 587
+EMAIL_HOST_USER = 'utsavadhikari452@gmail.com'
+EMAIL_HOST_PASSWORD = 'jkbr cvht owpj spno'
+EMAIL_USE_TLS = True

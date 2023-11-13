@@ -18,6 +18,9 @@ header{
     background: black;
 }
 
+#matchesCount {
+    color: red;
+}
 
 #chk1{
     display: none;

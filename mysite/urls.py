@@ -28,14 +28,15 @@ urlpatterns = [
     path('update/',views.update, name='update'),
     path('search/', views.search, name='search'),
     path('delete/<int:row_id>/', views.delete_row, name='delete_row'),
-
+    path('profile_view/',views.profile_view,name='profile_view'),
+    path('delete_profile/<int:profile_id>/', views.delete_profile, name='delete_profile'),
     # for the chatting section
-
-    path('create_chat/<int:to_user_id>/', views.create_chat, name='create_chat'),
-    path('chat/<int:chat_id>/', views.get_chat_history, name='get_chat_history'),
-    path('send_message/<int:chat_id>/', views.send_message, name='send_message'),
+    path('registration-report/', views.registration_report, name='registration_report'),
+    path('generate-report/', views.generate_pdf_report, name='generate_report'),
+    path('sendemail/',views.sendemail,name="sendemail"),
 
     
+
     
 ]
 

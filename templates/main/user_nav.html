@@ -27,10 +27,16 @@
   <ul>
     <li><a href="{%url 'mysite:dash'%}">Home</a></li>
     <li><a href="{%url 'mysite:profile1'%}">Profile</a></li>
-    <li><a href="{%url 'mysite:find_roomates'%}">Matches <span id="matchesCount">{{num_matches}}</span></a></li>
-    <li><a href="#"><i class="bi bi-bell" id="openNotificationSlider"></i></a></li>
-    <li><a href="{% url 'mysite:create_chat' to_user_id=user_id %}"><i class="bi bi-chat-dots-fill"></i></a></li>
-   
+    <li><a href="{%url 'mysite:find_roomates'%}">Matches
+       {% comment %} {% if user_has_profile %}
+        <span id="matchesCount">{{ num_matches }}</span>
+      {% endif %}  {% endcomment %}
+      <span id="matchesCount">{{ num_matches }}</span> 
+    
+    </a></li>
+    <!-- <li><a href="#"><i class="bi bi-bell" id="openNotificationSlider"></i></a></li>
+    <li><a href="#"><i class="bi bi-chat-dots-fill"></i></a></li>
+    -->
   
   </ul>
 

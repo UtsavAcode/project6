@@ -1,0 +1,24 @@
+{% include '../base/base.html' %}
+{%load static%}
+<!-- main/templates/main/weekly_report.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weekly Report</title>
+</head>
+<body>
+    <h1>Weekly Report</h1>
+    
+    {% if num_matches > 0 %}
+        <p>Number of matches in the week: {{ num_matches }}</p>
+        <ul>
+            {% for user in matching_users %}
+                <li>{{ user.username }} - {{ user.email }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No matches found in the week.</p>
+    {% endif %}
+</body>
+</html>

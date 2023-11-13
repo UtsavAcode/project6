@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <h1>Messages</h1>
+
+    <div class="message-container">
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {% if message.sender == request.user.profile %}sent{% else %}received{% endif %}">
+                    <p>{{ message.content }}</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <form id="message-form" action="{% url 'mysite:send_message' recipient_id %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="recipient_id" value="{{ recipient_id }}">
+            <textarea id="message_content" name="message_content" rows="4" placeholder="Type your message here"></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+{% endblock %}

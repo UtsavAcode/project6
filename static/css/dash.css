@@ -178,3 +178,23 @@ p{
 }
 
 
+#delete{
+    margin-top: 5px;
+}
+
+#delete button{
+    width: 115px;
+}
+
+ #closeMessageLink {
+        color: #080909; /* Change link color to blue */
+        text-decoration: underline;
+        cursor: pointer;
+        position: absolute;
+        top: 5px; /* Adjust top position to move it to the top-right corner */
+        right: 10px; /* Move it to the right */
+    }
+
+
+
+   
